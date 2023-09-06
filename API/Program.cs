@@ -1,3 +1,6 @@
+using API.services;
+using API.services.implementation;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,7 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(); 
+
+
+builder.Services.AddHttpClient<INasaService>();
+
+builder.Services.AddTransient<INasaService, NasaService>();
 
 var app = builder.Build();
 
