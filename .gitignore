@@ -1,0 +1,62 @@
+ # .NET and Visual Studio specific files and folders
+.vscode/
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.sln.docstates
+*.userprefs
+*.suo
+*.user
+_ReSharper/
+.idea/
+*.sln.iml
+*.ide/
+*.suo
+*.user
+*.userosscache
+*.suo
+*.suo
+[Tt]est[Rr]esult*/
+wwwroot/
+
+# User-specific files and settings
+*.suo
+*.user
+*.suo
+*.user
+*.suo
+*.user
+*.userosscache
+*.suo
+
+# Package files
+*.nupkg
+*.paket
+paket-files/
+paket-files/
+
+# Visual Studio Code settings
+.vscode/
+.vscode/
+
+# Rider settings
+.idea/
+.idea/
+
+# User-specific files and settings
+*.suo
+*.user
+*.suo
+*.user
+*.suo
+*.user
+*.userosscache
+*.suo
+
+# NuGet
+*.nuget.props
+*.nuget.targets
+NuGet.config
+.NuGet/
