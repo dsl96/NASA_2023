@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GUI.Model
 {
-    internal class NasaDaylyPicture
+    internal class NasaDailyPictureModel
     {
     }
 }
