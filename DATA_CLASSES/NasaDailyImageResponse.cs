@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GUI.DAL.DataClasses
+namespace DATA_CLASSES
 {
-    public class dailyImageResponse
+    public class NasaDailyImageResponse
     {
-
         [JsonProperty("copyright")]
         public string Copyright { get; set; }
 
@@ -18,6 +17,9 @@ namespace GUI.DAL.DataClasses
 
         [JsonProperty("explanation")]
         public string Explanation { get; set; }
+
+        [JsonProperty("hdurl")]
+        public string HdUrl { get; set; }
 
         [JsonProperty("media_type")]
         public string MediaType { get; set; }
@@ -30,9 +32,5 @@ namespace GUI.DAL.DataClasses
 
         [JsonProperty("url")]
         public string Url { get; set; }
-
-        [JsonProperty("hdurl")]
-        public string HdUrl { get; set; }
     }
 }
-
