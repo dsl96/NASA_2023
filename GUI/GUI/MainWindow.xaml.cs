@@ -23,68 +23,16 @@ namespace GUI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
-        NasaClient client;
-        public  MainWindow()
+
+        public MainWindow()
         {
             InitializeComponent();
 
-            DataContext = this;
 
-
-             client = new NasaClient();
-
-          
- 
         }
 
-        private string imageUrl;
-
-        public string ImageUrl
-        {
-            get { return imageUrl; }
-            set
-            {
-                if (imageUrl != value)
-                {
-                    imageUrl = value;
-                    OnPropertyChanged("ImageUrl");
-                }
-            }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private async void loadImage( )
-        {
-            var dailyImg = await client.GetDailyImage();
-
-          
-            if (dailyImg != null)
-            {
-
-                if(dailyImg.HdUrl!= null)
-                   ImageUrl =  dailyImg.HdUrl ;
-                else
-                {
-                    ImageUrl = dailyImg.Url;
-                }
-            }
-
-             
-        }
-
-       
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            loadImage();
-        }
     }
 }
 

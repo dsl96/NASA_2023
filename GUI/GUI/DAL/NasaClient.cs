@@ -18,12 +18,13 @@ namespace GUI.DAL
 
         public readonly DateTime MinDate = new DateTime(1995, 1, 1);
 
+        //the max date to get daily image is the date in usa
         public  DateTime MaxDate => GetTimeInNewYork();
 
         static  NasaClient()
         {       
                 _client = new HttpClient();
-            _client.BaseAddress = new Uri("http://localhost:5150/Space/");
+                _client.BaseAddress = new Uri("http://localhost:5150/Space/");
         }
         
         public async Task<dailyImageResponse> GetDailyImage(DateTime? dateTime = null)

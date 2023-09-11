@@ -25,42 +25,28 @@ namespace GUI.UserControlls
                     selectedDate = value;
                     ExecuteDateChangedCommand(value);
                     OnPropertyChanged("SelectedDate");
-                   
+
                 }
             }
         }
 
-        private string imageDescription;
+        private dailyImageResponse imageData;
 
-        public string ImageDescription
+        public dailyImageResponse ImageData
         {
-            get { return imageDescription; }
+            get { return imageData; }
             set
             {
-                if (imageDescription != value)
+                if (imageData != value)
                 {
-                    imageDescription = value;
-                    OnPropertyChanged("ImageDescription");
+                    imageData = value;
+                    OnPropertyChanged("ImageData");
                 }
             }
         }
 
-        private string imageUrl;
-
-        public string ImageUrl
-        {
-            get { return imageUrl; }
-            set
-            {
-                if (imageUrl != value)
-                {
-                    imageUrl = value;
-                    OnPropertyChanged("ImageUrl");
-                }
-            }
-        }
-
-        private DateTime _minDate = new DateTime(2023, 1, 1);
+        //the min date to choose image
+        private DateTime _minDate;
         public DateTime MinDate
         {
             get { return _minDate; }
@@ -71,7 +57,8 @@ namespace GUI.UserControlls
             }
         }
 
-        private DateTime _maxDate = new DateTime(2023, 12, 31);
+        //the max date to choose image
+        private DateTime _maxDate;
         public DateTime MaxDate
         {
             get { return _maxDate; }
@@ -82,46 +69,40 @@ namespace GUI.UserControlls
             }
         }
 
-
-
         private readonly NasaClient dailyImageService;
 
         public DailyImgVM()
         {
-            dailyImageService = new NasaClient();
+           this. dailyImageService = new NasaClient();
 
-            _maxDate = dailyImageService.MaxDate;
-            _minDate = dailyImageService.MinDate;
-            SelectedDate = _maxDate;
+            this.MaxDate = dailyImageService.MaxDate;
+            this.MinDate = dailyImageService.MinDate;
+            this.SelectedDate = _maxDate;
         }
 
         private async void ExecuteDateChangedCommand(object parameter)
         {
-           if (parameter == null)
+            if (parameter == null)
             {
                 return;
             }
 
             DateTime newDate = (DateTime)parameter;
 
-            dailyImageResponse newImage = await getImageUrl(newDate);
-
-            if(newImage != null)
-            {
-                ImageUrl = newImage.HdUrl != null ? newImage.HdUrl : newImage.Url;
-                ImageDescription = newImage.Explanation;
-            }
-                
+            await UpdateImageData(newDate);
         }
 
-
-        private async Task<dailyImageResponse> getImageUrl(DateTime date)
+        private async Task UpdateImageData(DateTime date)
         {
-           var  response  = await dailyImageService.GetDailyImage(date);
-           return response;
- 
-        }
+            var response = await dailyImageService.GetDailyImage(date);
 
+            if (response != null)
+            {
+                //set the default url to hd if exist
+                response.Url = (response.HdUrl != null) ? response.HdUrl : response.Url;
+                ImageData = response;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -132,4 +113,4 @@ namespace GUI.UserControlls
     }
 
 }
- 
+

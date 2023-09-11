@@ -29,5 +29,6 @@ namespace GUI.UserControlls
 
             DataContext = vm;
         }
+ 
     }
 }
