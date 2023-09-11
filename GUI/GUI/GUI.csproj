@@ -73,10 +73,10 @@
     </ApplicationDefinition>
     <Compile Include="command\RelayCommand.cs" />
     <Compile Include="converters\UrlToImageConverter.cs" />
-    <Compile Include="UserControlls\DailyImgUserControl.xaml.cs">
+    <Compile Include="UserControlls\DailyImageUserControl\DailyImgUserControl.xaml.cs">
       <DependentUpon>DailyImgUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControlls\DailyImgVM.cs" />
+    <Compile Include="UserControlls\DailyImageUserControl\DailyImgVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,7 +91,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControlls\DailyImgUserControl.xaml">
+    <Page Include="UserControlls\DailyImageUserControl\DailyImgUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
