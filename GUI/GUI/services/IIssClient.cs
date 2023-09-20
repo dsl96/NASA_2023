@@ -1,0 +1,16 @@
+﻿using DATA_CLASSES;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GUI.services
+{
+    internal interface IIssClient
+    {
+
+        Task<IssLocationResponse> GetIssLocation();
+        
+    }
+}

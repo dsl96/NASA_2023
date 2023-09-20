@@ -1,4 +1,5 @@
-﻿using GUI.services;
+﻿using DATA_CLASSES;
+using GUI.services;
 using GUI.services.implementation;
 using System;
 using System.Collections.Generic;
@@ -24,28 +25,32 @@ namespace GUI.UserControlls
     public partial class IssTrackerUserControl : UserControl , INotifyPropertyChanged
     {
 
-        public string _url { get; set; }
+        public IssLocationResponse  _IssLocation { get; set; }
  
-        public string url
+        public IssLocationResponse IssLocation
         {
-            get { return _url; }
+            get { return  _IssLocation; }
             set
             {
-                _url = value;
-                OnPropertyChanged("url");
+              _IssLocation = value;
+                OnPropertyChanged("IssLocation");
             }
         }
-        public IssTrackerUserControl()
+        public  IssTrackerUserControl()
         {
             InitializeComponent();
 
-            IWorldMapClient c = new WorldMapClient();
-
-
-
-            url =  @"https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=665&height=660&center=lonlat:16.804209,0&zoom=0.3772&center=lonlat:14.658025,0&apiKey=d548c5ed24604be6a9dd0d989631f783";
-            url = c.GetMapUrl(new models.Coordinate( - 51.4928, -176.9762));
             DataContext = this;
+
+           
+ 
+        }
+
+        private async void IssTrackerUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var client = new IssClient();
+
+            IssLocation = await client.GetIssLocation();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

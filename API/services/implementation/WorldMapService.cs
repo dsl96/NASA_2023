@@ -19,15 +19,16 @@ namespace API.services.implementation
 
            
 
-            string apiToken = configuration.GetValue<string>("NASA_URL")!;
-
-            var apiKey = "d548c5ed24604be6a9dd0d989631f783";
-            _baseUrl = $@"https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=665&height=660&center=lonlat:16.804209,0&zoom=0.3772&color:%23ff0000;size:medium;icon:rocket;icontype:awesome;whitecircle:no&center=lonlat:14.658025,0&apiKey={apiKey}";
+            string apiToken = configuration.GetValue<string>("WORLD_MAP_TOKEN")!;
+ 
+            _baseUrl = $@"https://maps.geoapify.com/v1/staticmap?style=klokantech-basic&width=665&height=660&center=lonlat:16.804209,0&zoom=0.3772&color:%23ff0000;size:medium;icon:rocket;icontype:awesome;whitecircle:no&center=lonlat:14.658025,0&apiKey={apiToken}";
             _markerParam = "&marker=lonlat:{0},{1};color:%23ff0000;size:medium;icon:rocket;icontype:awesome;whitecircle:no";
         }
 
         public async Task<byte[]?> GetWorldMap((double, double)[] markersLonLat)
         {
+
+            //add the markers params to the http get url
             string queryMarkerParams = "";
 
             foreach (var lonlat in markersLonLat)

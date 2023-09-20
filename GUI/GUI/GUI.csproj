@@ -73,9 +73,9 @@
     </ApplicationDefinition>
     <Compile Include="command\RelayCommand.cs" />
     <Compile Include="converters\UrlToImageConverter.cs" />
-    <Compile Include="models\Coordinate.cs" />
-    <Compile Include="services\implementation\WorldMapClient.cs" />
-    <Compile Include="services\IWorldMapClient.cs" />
+    <Compile Include="models\IssLocationResponse.cs" />
+    <Compile Include="services\IIssClient.cs" />
+    <Compile Include="services\implementation\IssClient.cs" />
     <Compile Include="UserControlls\DailyImageUserControl\DailyImgUserControl.xaml.cs">
       <DependentUpon>DailyImgUserControl.xaml</DependentUpon>
     </Compile>
@@ -134,6 +134,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

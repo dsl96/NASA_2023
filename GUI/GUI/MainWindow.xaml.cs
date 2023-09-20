@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static System.Net.Mime.MediaTypeNames;
 
+
 namespace GUI
 {
     /// <summary>
@@ -29,6 +30,7 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
+             
         }
 
     }
