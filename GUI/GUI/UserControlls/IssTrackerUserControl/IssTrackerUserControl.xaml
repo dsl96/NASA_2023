@@ -16,15 +16,18 @@
         <Grid Background="Black">
 
 
-        <Image Grid.Column="0" Source="{Binding IssLocation.imageData, Converter={StaticResource UrlToImageConverter}}"></Image>
+        <Image Grid.Column="0" Source="{Binding IssLocation.imageData, Converter={StaticResource UrlToImageConverter}}">
+           
+        </Image>
 
-        <Button Click="IssTrackerUserControl_Loaded"></Button>
- 
+         
+        <Button Content="Update Location" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Click="IssTrackerUserControl_Loaded" />
 
- 
 
-             
-            </Grid>
+
+
+
+    </Grid>
 
       
   
