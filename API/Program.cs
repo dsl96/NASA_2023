@@ -12,8 +12,12 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddHttpClient<INasaService>();
+builder.Services.AddHttpClient<IissDataService>();
+builder.Services.AddHttpClient<IWorldMapService>();
 
 builder.Services.AddTransient<INasaService, NasaService>();
+builder.Services.AddTransient<IissDataService, issDataService>();
+builder.Services.AddTransient<IWorldMapService,  WorldMapService>();
 
 var app = builder.Build();
 

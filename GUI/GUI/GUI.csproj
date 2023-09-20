@@ -73,10 +73,17 @@
     </ApplicationDefinition>
     <Compile Include="command\RelayCommand.cs" />
     <Compile Include="converters\UrlToImageConverter.cs" />
+    <Compile Include="models\Coordinate.cs" />
+    <Compile Include="services\implementation\WorldMapClient.cs" />
+    <Compile Include="services\IWorldMapClient.cs" />
     <Compile Include="UserControlls\DailyImageUserControl\DailyImgUserControl.xaml.cs">
       <DependentUpon>DailyImgUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlls\DailyImageUserControl\DailyImgVM.cs" />
+    <Compile Include="UserControlls\IssTrackerUserControl\IssTrackerUserControl.xaml.cs">
+      <DependentUpon>IssTrackerUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -85,13 +92,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DAL\DataClasses\dailyImageResponse.cs" />
-    <Compile Include="DAL\NasaClient.cs" />
+    <Compile Include="models\dailyImageResponse.cs" />
+    <Compile Include="services\NasaClient.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UserControlls\DailyImageUserControl\DailyImgUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlls\IssTrackerUserControl\IssTrackerUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

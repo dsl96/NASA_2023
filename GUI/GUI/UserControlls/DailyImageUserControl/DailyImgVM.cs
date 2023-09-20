@@ -1,6 +1,6 @@
 ﻿using GUI.command;
-using GUI.DAL;
-using GUI.DAL.DataClasses;
+using GUI.services;
+using GUI.models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace GUI.UserControlls
 {
-    internal class DailyImgVM : INotifyPropertyChanged
+    internal class DailyImgVM : ViewModelBase
     {
         private DateTime selectedDate;
 
@@ -103,13 +103,7 @@ namespace GUI.UserControlls
                 ImageData = response;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+     
     }
 
 }

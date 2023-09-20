@@ -1,32 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
- 
 using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-
 namespace GUI.converters
 {
-    
     public class UrlToImageConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string url && Uri.IsWellFormedUriString(url, UriKind.Absolute))
+
+          //  value = "C:\\Users\\dov31\\Desktop\\images.png";
+            if (value is string url)
             {
                 try
                 {
                     BitmapImage image = new BitmapImage();
                     image.BeginInit();
-                    image.CacheOption = BitmapCacheOption.OnLoad;
-                    image.UriSource = new Uri(url);
-                    image.EndInit();
-                    return image;
+
+                    if ( checkValidInternetUri(url)  ||  File.Exists(url))
+                    {
+                        image.UriSource = new Uri(url);
+                        image.CacheOption = BitmapCacheOption.OnLoad;
+                        image.EndInit();
+                        return image;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid URL or local file path");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -34,13 +38,20 @@ namespace GUI.converters
                 }
             }
 
-            return null; // Return null if the URL is not valid or the image cannot be loaded
+            return null;
         }
+
+        private bool checkValidInternetUri(string url)
+        {
+            return Uri.TryCreate(url, UriKind.Absolute, out Uri uriResult) &&
+                (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+
+        }
+ 
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
     }
-
 }

@@ -12,8 +12,7 @@
     
     <Grid>
 
-       
-            <local:DailyImgUserControl></local:DailyImgUserControl>
+        <local:DailyImgUserControl></local:DailyImgUserControl>
         
 
     </Grid>

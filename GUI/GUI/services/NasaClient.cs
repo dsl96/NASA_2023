@@ -4,10 +4,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using GUI.DAL.DataClasses;
 using Newtonsoft.Json;
+using GUI.models;
+ 
 
-namespace GUI.DAL
+namespace GUI.services
 {
     internal class NasaClient
     {
