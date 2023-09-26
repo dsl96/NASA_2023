@@ -12,8 +12,19 @@
     
     <Grid>
 
-        <local:IssTrackerUserControl></local:IssTrackerUserControl>
-        
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition >
+            
+            </ColumnDefinition>
+            <ColumnDefinition ></ColumnDefinition>
+            
+            
+         
+        </Grid.ColumnDefinitions>
+
+        <local:DailyImgUserControl Grid.Column="0"></local:DailyImgUserControl>
+        <local:IssTrackerUserControl Grid.Column="1"></local:IssTrackerUserControl>
 
     </Grid>
 </Window>
