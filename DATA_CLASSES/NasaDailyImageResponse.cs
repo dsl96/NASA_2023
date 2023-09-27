@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,17 +11,20 @@ namespace DATA_CLASSES
 {
     public class NasaDailyImageResponse
     {
-        [JsonProperty("copyright")]
-        public string Copyright { get; set; }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [JsonProperty("date")]
         public DateTime Date { get; set; }
+
+        [JsonProperty("copyright")]
+        public string Copyright { get; set; }
 
         [JsonProperty("explanation")]
         public string Explanation { get; set; }
 
         [JsonProperty("hdurl")]
-        public string HdUrl { get; set; }
+        public string? HdUrl { get; set; }
 
         [JsonProperty("media_type")]
         public string MediaType { get; set; }
@@ -34,3 +39,5 @@ namespace DATA_CLASSES
         public string Url { get; set; }
     }
 }
+
+

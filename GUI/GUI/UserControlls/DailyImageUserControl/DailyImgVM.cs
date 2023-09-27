@@ -96,10 +96,12 @@ namespace GUI.UserControlls
         {
             var response = await dailyImageService.GetDailyImage(date);
 
+            //TODO check video
+
             if (response != null)
             {
                 //set the default url to hd if exist
-                response.Url = (response.HdUrl != null) ? response.HdUrl : response.Url;
+              //  response.Url = (response.HdUrl != null) ? response.HdUrl : response.Url;
                 ImageData = response;
             }
         }

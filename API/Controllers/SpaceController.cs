@@ -21,7 +21,7 @@ namespace API.Controllers
         }
 
         [HttpGet("doron")]
-        public  async Task<ActionResult<NasaDailyImageResponse>> Get(DateTime dateTime)
+        public  async Task<ActionResult<NasaDailyImageResponse>> Get(DateTime? dateTime=null)
         {
     
             return await _nasaService.GetDailyImage(dateTime);
