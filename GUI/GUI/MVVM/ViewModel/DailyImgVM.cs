@@ -25,6 +25,7 @@ namespace GUI.Mvvm.VM
 
 
         private dailyImageResponse imageData;
+
         public dailyImageResponse ImageData
         {
             get { return imageData; }
@@ -37,7 +38,6 @@ namespace GUI.Mvvm.VM
                 }
             }
         }
-
 
         //the min date to choose image
         private DateTime _minDate;
@@ -70,13 +70,12 @@ namespace GUI.Mvvm.VM
 
         public DailyImgVM()
         {
-           this. dailyImageService = new NasaClient();
+            this.dailyImageService = new NasaClient();
 
             this.MaxDate = dailyImageService.MaxDate;
             this.MinDate = dailyImageService.MinDate;
             this.SelectedDate = _maxDate;
         }
-
 
         private async void ExecuteDateChangedCommand(object parameter)
         {
@@ -98,11 +97,11 @@ namespace GUI.Mvvm.VM
             if (response != null)
             {
                 //set the default url to hd if exist
-                response.Url = (response.HdUrl != null) ? response.HdUrl : response.Url;
+                //response.Url = (response.HdUrl != null) ? response.HdUrl : response.Url;
                 ImageData = response;
             }
         }
-     
+
     }
 
 }

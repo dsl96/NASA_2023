@@ -1,4 +1,5 @@
-﻿using GUI.models;
+﻿using GUI.command;
+using GUI.models;
 using GUI.services;
 using GUI.services.implementation;
 using System;
@@ -16,6 +17,9 @@ namespace GUI.MVVM.ViewModel
 
         public IssLocationResponse _IssLocation { get; set; }
 
+        RefreshISScomand refreshISScomand { get; set; }
+        private IssClient _IssClient { get; set; }
+
         public IssLocationResponse IssLocation
         {
             get { return _IssLocation; }
@@ -26,14 +30,13 @@ namespace GUI.MVVM.ViewModel
             }
         }
 
-        ISSlocationVM()
+        public ISSlocationVM()
         {
-            
+            var issLocation = new IssClient().GetIssLocation();
+
+            refreshISScomand = new RefreshISScomand(this);
         }
-        private async void IssTrackerUserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            IssLocation = await new IssClient().GetIssLocation();
-        }
+        
 
     }
 }

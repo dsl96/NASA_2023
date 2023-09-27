@@ -14,7 +14,7 @@ aml/themes"
     
     <Grid>
 
-        <local:DailyImgUserControl></local:DailyImgUserControl>
+        <local:IssTrackerUserControl></local:IssTrackerUserControl>
         
 
     </Grid>

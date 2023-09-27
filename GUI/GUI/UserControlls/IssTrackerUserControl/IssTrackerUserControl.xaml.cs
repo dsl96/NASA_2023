@@ -1,5 +1,4 @@
-﻿using DATA_CLASSES;
-using GUI.MVVM.ViewModel;
+﻿using GUI.MVVM.ViewModel;
 using GUI.services;
 using GUI.services.implementation;
 using System;
@@ -28,9 +27,9 @@ namespace GUI.UserControlls
         private readonly ISSlocationVM vmISS;
         public  IssTrackerUserControl()
         {
-            vmISS =new ISSlocationVM();
             InitializeComponent();
 
+            vmISS = new ISSlocationVM();
             DataContext = vmISS;
         }
 

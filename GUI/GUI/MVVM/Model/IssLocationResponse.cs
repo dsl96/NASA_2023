@@ -17,7 +17,5 @@ namespace GUI.models
 
         [JsonProperty("imageData")]
         public byte[] imageData { get; set; }  
-    }
-
-   
+    }   
 }

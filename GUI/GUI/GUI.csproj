@@ -71,10 +71,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="command\RelayCommand.cs" />
+    <Compile Include="command\RefreshISScomand.cs" />
     <Compile Include="converters\UrlToImageConverter.cs" />
     <Compile Include="MVVM\Model\IssLocationResponse.cs" />
-    <Compile Include="MVVM\Model\IssPosoton.cs" />
+    <Compile Include="MVVM\Model\IssPosiotion.cs" />
     <Compile Include="MVVM\ViewModel\ISSlocationVM.cs" />
     <Compile Include="services\IIssClient.cs" />
     <Compile Include="services\implementation\IssClient.cs" />
@@ -95,7 +95,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MVVM\Model\dailyImageResponse.cs" />
-    <Compile Include="services\NasaClient.cs" />
+    <Compile Include="services\implementation\NasaClient.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
