@@ -1,4 +1,5 @@
 ﻿using DATA_CLASSES;
+using GUI.MVVM.ViewModel;
 using GUI.services;
 using GUI.services.implementation;
 using System;
@@ -22,41 +23,16 @@ namespace GUI.UserControlls
     /// <summary>
     /// Interaction logic for IssTrackerUserControl.xaml
     /// </summary>
-    public partial class IssTrackerUserControl : UserControl , INotifyPropertyChanged
+    public partial class IssTrackerUserControl : UserControl
     {
-
-        public IssLocationResponse  _IssLocation { get; set; }
- 
-        public IssLocationResponse IssLocation
-        {
-            get { return  _IssLocation; }
-            set
-            {
-              _IssLocation = value;
-                OnPropertyChanged("IssLocation");
-            }
-        }
+        private readonly ISSlocationVM vmISS;
         public  IssTrackerUserControl()
         {
+            vmISS =new ISSlocationVM();
             InitializeComponent();
 
-            DataContext = this;
-
-           
- 
+            DataContext = vmISS;
         }
 
-        private async void IssTrackerUserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            var client = new IssClient();
-
-            IssLocation = await client.GetIssLocation();
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

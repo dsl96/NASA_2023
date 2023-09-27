@@ -21,11 +21,8 @@
         </Image>
 
          
-        <Button Content="Update Location" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Click="IssTrackerUserControl_Loaded" />
-
-
-
-
+        <Button Content="Update Location" HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" Click="IssTrackerUserControl_Loaded" />
 
     </Grid>
 
