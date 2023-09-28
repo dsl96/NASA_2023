@@ -19,10 +19,10 @@ namespace GUI.models
         [JsonProperty("explanation")]
         public string Explanation { get; set; }
 
-        [JsonProperty("media_type")]
+        [JsonProperty("mediaType")]
         public string MediaType { get; set; }
 
-        [JsonProperty("service_version")]
+        [JsonProperty("serviceVersion")]
         public string ServiceVersion { get; set; }
 
         [JsonProperty("title")]

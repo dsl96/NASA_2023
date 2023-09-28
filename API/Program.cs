@@ -1,5 +1,10 @@
+using API.DAL;
+using API.DAL.imlementations;
 using API.services;
 using API.services.implementation;
+using DATA_CLASSES;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +23,15 @@ builder.Services.AddHttpClient<IWorldMapService>();
 builder.Services.AddTransient<INasaService, NasaService>();
 builder.Services.AddTransient<IissDataService, issDataService>();
 builder.Services.AddTransient<IWorldMapService,  WorldMapService>();
+
+
+var connString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<SpaceContext>(options =>
+options.UseSqlServer(
+             connString ));
+
+builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
