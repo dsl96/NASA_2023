@@ -1,4 +1,6 @@
-﻿using GUI.services;
+﻿using GUI.Mvvm.VM;
+using GUI.MVVM.ViewModel;
+using GUI.services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,13 +28,10 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public MainWindow()
         {
             InitializeComponent();
-             
         }
-
     }
 }
 

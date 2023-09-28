@@ -39,16 +39,20 @@
                     Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"                  
-                    Margin="0,10,10,10">
+                    Margin="0,10,10,10"
+                    >
            
 
             </DatePicker>
 
-            <TextBlock Grid.Row="1"
+            <ScrollViewer  Grid.Row="1">
+                <TextBlock
                      Style="{StaticResource MaterialDesignButtonTextBlock}"
                      Text="{Binding ImageData.Explanation}" 
                       Foreground="White"
                       TextWrapping="Wrap"/>
+            </ScrollViewer>
+                
         </Grid>
       
     </Grid>

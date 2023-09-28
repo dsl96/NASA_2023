@@ -5,31 +5,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUI.UserControlls"
              xmlns:converters="clr-namespace:GUI.converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
- 
 
-        <UserControl.Resources>
-            <converters:UrlToImageConverter x:Key="UrlToImageConverter"/>
-        </UserControl.Resources>
 
-        <Grid Background="Black">
+    <UserControl.Resources>
+        <converters:UrlToImageConverter x:Key="UrlToImageConverter"/>
+    </UserControl.Resources>
+
+    <Grid Background="Black">
 
 
         <Image Grid.Column="0" Source="{Binding IssLocation.imageData, Converter={StaticResource UrlToImageConverter}}">
-           
+
         </Image>
 
-         
-        <Button Content="Update Location" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Click="IssTrackerUserControl_Loaded" />
 
+       
 
-
-
+        <Button
+        Content="{materialDesign:PackIcon  Refresh}"
+        ToolTip="Update Location" 
+              Command="{Binding refreshISScomand}"   
+              VerticalAlignment="Bottom"
+              HorizontalAlignment="Left"
+              Width="Auto"/>
 
     </Grid>
 
-      
-  
+
+
 
 </UserControl>

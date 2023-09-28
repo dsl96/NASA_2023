@@ -1,20 +1,13 @@
-﻿using GUI.command;
-using GUI.services;
+﻿using GUI.services;
 using GUI.models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
-namespace GUI.UserControlls
+namespace GUI.Mvvm.VM
 {
     internal class DailyImgVM : ViewModelBase
     {
         private DateTime selectedDate;
-
         public DateTime SelectedDate
         {
             get { return selectedDate; }
@@ -29,6 +22,7 @@ namespace GUI.UserControlls
                 }
             }
         }
+
 
         private dailyImageResponse imageData;
 
@@ -57,6 +51,7 @@ namespace GUI.UserControlls
             }
         }
 
+
         //the max date to choose image
         private DateTime _maxDate;
         public DateTime MaxDate
@@ -69,11 +64,13 @@ namespace GUI.UserControlls
             }
         }
 
+
         private readonly NasaClient dailyImageService;
+
 
         public DailyImgVM()
         {
-           this. dailyImageService = new NasaClient();
+            this.dailyImageService = new NasaClient();
 
             this.MaxDate = dailyImageService.MaxDate;
             this.MinDate = dailyImageService.MinDate;
@@ -92,6 +89,7 @@ namespace GUI.UserControlls
             await UpdateImageData(newDate);
         }
 
+
         private async Task UpdateImageData(DateTime date)
         {
             var response = await dailyImageService.GetDailyImage(date);
@@ -105,7 +103,7 @@ namespace GUI.UserControlls
                 ImageData = response;
             }
         }
-     
+
     }
 
 }

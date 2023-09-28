@@ -36,7 +36,7 @@ namespace GUI.services
             {
                  
 
-                queryUrl = queryUrl + $"?dateTime={dateTime}";
+                queryUrl = queryUrl + $"?dateTime={dateTime.Value.ToString("yyyy-MM-dd")}";
             }
             
             var response = await _client.GetAsync(queryUrl);

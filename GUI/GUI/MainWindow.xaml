@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
-         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xc:\users\david\source\repos\nasa_2023\gui\gui\mainwindow.xaml
+c:\users\david\source\repos\nasa_2023\gui\gui\mainwindow.xaml.cs
+aml/themes"
         xmlns:local="clr-namespace:GUI.UserControlls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -11,20 +13,20 @@
  
     
     <Grid>
+         <TabControl Style="{StaticResource MaterialDesignFilledUniformTabControl}">
+            <TabItem Header="ISS">
+                <Grid>
+                    <local:IssTrackerUserControl/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Daily image">
+                <Grid>
+                    <local:DailyImgUserControl/>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
-        <Grid.ColumnDefinitions>
-
-            <ColumnDefinition >
-            
-            </ColumnDefinition>
-            <ColumnDefinition ></ColumnDefinition>
-            
-            
-         
-        </Grid.ColumnDefinitions>
-
-        <local:DailyImgUserControl Grid.Column="0"></local:DailyImgUserControl>
-        <local:IssTrackerUserControl Grid.Column="1"></local:IssTrackerUserControl>
+ 
 
     </Grid>
 </Window>
