@@ -14,8 +14,19 @@ aml/themes"
     
     <Grid>
 
-        <local:IssTrackerUserControl></local:IssTrackerUserControl>
-        
+        <TabControl Style="{StaticResource MaterialDesignFilledUniformTabControl}">
+            <TabItem Header="ISS">
+                <Grid>
+                    <local:IssTrackerUserControl/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Daily image">
+                <Grid>
+                    <local:DailyImgUserControl/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
 
     </Grid>
 </Window>

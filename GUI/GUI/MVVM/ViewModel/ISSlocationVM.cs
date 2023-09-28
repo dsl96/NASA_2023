@@ -17,7 +17,8 @@ namespace GUI.MVVM.ViewModel
 
         public IssLocationResponse _IssLocation { get; set; }
 
-        RefreshISScomand refreshISScomand { get; set; }
+        public RefreshISScomand refreshISScomand { get; set; }
+
         private IssClient _IssClient { get; set; }
 
         public IssLocationResponse IssLocation
@@ -35,8 +36,7 @@ namespace GUI.MVVM.ViewModel
             var issLocation = new IssClient().GetIssLocation();
 
             refreshISScomand = new RefreshISScomand(this);
-        }
-        
 
+        }
     }
 }
