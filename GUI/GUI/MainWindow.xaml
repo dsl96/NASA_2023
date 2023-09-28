@@ -13,8 +13,7 @@ aml/themes"
  
     
     <Grid>
-
-        <TabControl Style="{StaticResource MaterialDesignFilledUniformTabControl}">
+         <TabControl Style="{StaticResource MaterialDesignFilledUniformTabControl}">
             <TabItem Header="ISS">
                 <Grid>
                     <local:IssTrackerUserControl/>
@@ -27,6 +26,7 @@ aml/themes"
             </TabItem>
         </TabControl>
 
+ 
 
     </Grid>
 </Window>

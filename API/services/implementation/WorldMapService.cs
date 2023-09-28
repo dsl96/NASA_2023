@@ -39,7 +39,7 @@ namespace API.services.implementation
 
             foreach (var lonlat in markersLonLat)
             {
-                //add 'http get' param to the url
+                //add 'http get' markers param to the url
                 queryMarkerParams += string.Format(_markerParam, lonlat.Item1, lonlat.Item2);
             }
 

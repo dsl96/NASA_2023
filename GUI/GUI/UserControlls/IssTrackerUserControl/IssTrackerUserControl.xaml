@@ -22,8 +22,15 @@
         </Image>
 
 
-        <Button Command="{Binding refreshISScomand}" Content="Update Location" HorizontalAlignment="Stretch"
-                VerticalAlignment="Bottom" />
+       
+
+        <Button
+        Content="{materialDesign:PackIcon  Refresh}"
+        ToolTip="Update Location" 
+              Command="{Binding refreshISScomand}"   
+              VerticalAlignment="Bottom"
+              HorizontalAlignment="Left"
+              Width="Auto"/>
 
     </Grid>
 
