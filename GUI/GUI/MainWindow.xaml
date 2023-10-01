@@ -6,7 +6,7 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xc:\users\david\source\repos\nasa_2023\gui\gui\mainwindow.xaml
 c:\users\david\source\repos\nasa_2023\gui\gui\mainwindow.xaml.cs
 aml/themes"
-        xmlns:local="clr-namespace:GUI.UserControlls"
+        xmlns:local="clr-namespace:GUI.MVVM.View.UserControlls"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 

@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUI.UserControlls
+namespace GUI.MVVM.View.UserControlls
 {
     /// <summary>
     /// Interaction logic for IssTrackerUserControl.xaml

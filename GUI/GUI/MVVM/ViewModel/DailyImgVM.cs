@@ -23,7 +23,6 @@ namespace GUI.Mvvm.VM
             }
         }
 
-
         private dailyImageResponse imageData;
 
         public dailyImageResponse ImageData
@@ -51,7 +50,6 @@ namespace GUI.Mvvm.VM
             }
         }
 
-
         //the max date to choose image
         private DateTime _maxDate;
         public DateTime MaxDate
@@ -64,9 +62,7 @@ namespace GUI.Mvvm.VM
             }
         }
 
-
         private readonly NasaClient dailyImageService;
-
 
         public DailyImgVM()
         {
@@ -88,7 +84,6 @@ namespace GUI.Mvvm.VM
 
             await UpdateImageData(newDate);
         }
-
 
         private async Task UpdateImageData(DateTime date)
         {

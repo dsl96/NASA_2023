@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GUI.Mvvm.VM;
 
-namespace GUI.UserControlls
+namespace GUI.MVVM.View.UserControlls
 {
     /// <summary>
     /// Interaction logic for DailyImgUserControl.xaml
@@ -27,9 +27,12 @@ namespace GUI.UserControlls
         {
             vm = new DailyImgVM();
             InitializeComponent();
-
             DataContext = vm;
         }
 
+        private void DatePicker_Opened(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
