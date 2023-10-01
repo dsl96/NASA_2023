@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
 using System.Linq.Expressions;
 
 namespace API.DAL.imlementations
@@ -17,12 +16,9 @@ namespace API.DAL.imlementations
             _dbSet = _context.Set<TEntity>();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
-        {
-            return await _dbSet.ToListAsync();
-        }
+     
 
-        public async Task<TEntity?> GetByIdAsync(int id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }
@@ -50,24 +46,54 @@ namespace API.DAL.imlementations
             await this.SaveAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> GetWithFilterAsync(Expression<Func<TEntity, bool>> filter)
-        {
-            return await _dbSet.Where(filter).ToListAsync();
-        }
-
-
-
         public async Task ClearAllAsync()
         {
             _dbSet.RemoveRange(await _dbSet.ToListAsync());
             await this.SaveAsync();
         }
 
+        public async Task<IEnumerable<TEntity>> GetAllAsync(
+         Expression<Func<TEntity, bool>> filter = null,
+         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+        List<Expression<Func<TEntity, object>>> includeProperties = null,
+        int? skip = null,
+        int? take = null)
+        {
+            IQueryable<TEntity> query = _dbSet.AsNoTracking();  
 
+            if (includeProperties != null)
+            {
+                query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+            }
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            if (skip.HasValue)
+            {
+                query = query.Skip(skip.Value);
+            }
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return await query.ToListAsync();
+        }
 
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }
+
+      
     }
 }
