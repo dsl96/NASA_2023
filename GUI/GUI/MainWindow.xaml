@@ -24,6 +24,12 @@ aml/themes"
                     <local:DailyImgUserControl/>
                 </Grid>
             </TabItem>
+
+            <TabItem Header="Astronaut">
+                <Grid>
+                    <local:AstronautListUserControl/>
+                </Grid>
+            </TabItem>
         </TabControl>
 
  
