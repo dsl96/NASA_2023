@@ -23,6 +23,7 @@ builder.Services.AddHttpClient<IWorldMapService>();
 builder.Services.AddTransient<INasaService, NasaService>();
 builder.Services.AddTransient<IissDataService, issDataService>();
 builder.Services.AddTransient<IWorldMapService,  WorldMapService>();
+builder.Services.AddTransient<IAstonutsService, AstonutsService>();
 
 
 var connString = builder.Configuration.GetConnectionString("DefaultConnection");

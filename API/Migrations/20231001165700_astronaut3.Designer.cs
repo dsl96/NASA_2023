@@ -4,6 +4,7 @@ using API.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(SpaceContext))]
-    partial class SpaceContextModelSnapshot : ModelSnapshot
+    [Migration("20231001165700_astronaut3")]
+    partial class astronaut3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,27 +31,37 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("abbrev")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("administrator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("country_code")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("featured")
+                    b.Property<bool>("featured")
                         .HasColumnType("bit");
 
                     b.Property<string>("founding_year")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image_url")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("launchers")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("logo_url")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
@@ -56,12 +69,15 @@ namespace API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("spacecraft")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("type")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("url")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
@@ -74,40 +90,43 @@ namespace API.Migrations
                     b.Property<int>("id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("age")
+                    b.Property<int>("age")
                         .HasColumnType("int");
 
-                    b.Property<int?>("agencyid")
+                    b.Property<int>("agencyid")
                         .HasColumnType("int");
 
                     b.Property<string>("bio")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("date_of_birth")
+                    b.Property<DateTime>("date_of_birth")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("date_of_death")
+                    b.Property<DateTime>("date_of_death")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("eva_time")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("first_flight")
+                    b.Property<DateTime>("first_flight")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("flights_count")
+                    b.Property<int>("flights_count")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("in_space")
+                    b.Property<bool>("in_space")
                         .HasColumnType("bit");
 
                     b.Property<string>("instagram")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("landings_count")
+                    b.Property<int>("landings_count")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("last_flight")
+                    b.Property<DateTime>("last_flight")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("name")
@@ -115,33 +134,49 @@ namespace API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nationality")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("profile_image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("profile_image_thumbnail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("spacewalks_count")
+                    b.Property<int>("spacewalks_count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("statusid")
                         .HasColumnType("int");
 
                     b.Property<string>("time_in_space")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("twitter")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("typeid")
+                        .HasColumnType("int");
 
                     b.Property<string>("url")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("wiki")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
                     b.HasIndex("agencyid");
+
+                    b.HasIndex("statusid");
+
+                    b.HasIndex("typeid");
 
                     b.ToTable("Astronauts");
                 });
@@ -184,34 +219,65 @@ namespace API.Migrations
                     b.ToTable("NasaDailyImages");
                 });
 
+            modelBuilder.Entity("DATA_CLASSES.Status", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Status");
+                });
+
+            modelBuilder.Entity("DATA_CLASSES.Type", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Type");
+                });
+
             modelBuilder.Entity("DATA_CLASSES.AstronautResponse", b =>
                 {
                     b.HasOne("DATA_CLASSES.Agency", "agency")
                         .WithMany()
-                        .HasForeignKey("agencyid");
+                        .HasForeignKey("agencyid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.OwnsOne("DATA_CLASSES.Status", "status", b1 =>
-                        {
-                            b1.Property<int>("AstronautResponseid")
-                                .HasColumnType("int");
+                    b.HasOne("DATA_CLASSES.Status", "status")
+                        .WithMany()
+                        .HasForeignKey("statusid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<string>("Name")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<int?>("stausId")
-                                .HasColumnType("int");
-
-                            b1.HasKey("AstronautResponseid");
-
-                            b1.ToTable("Astronauts");
-
-                            b1.WithOwner()
-                                .HasForeignKey("AstronautResponseid");
-                        });
+                    b.HasOne("DATA_CLASSES.Type", "type")
+                        .WithMany()
+                        .HasForeignKey("typeid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("agency");
 
                     b.Navigation("status");
+
+                    b.Navigation("type");
                 });
 #pragma warning restore 612, 618
         }
