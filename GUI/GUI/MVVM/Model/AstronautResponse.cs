@@ -48,8 +48,7 @@ namespace GUI.MVVM.Model
             public string founding_year { get; set; }
             public string launchers { get; set; }
             public string spacecraft { get; set; }
-            public object parent { get; set; }
-            public object image_url { get; set; }
+            public דארןמע image_url { get; set; }
             public string logo_url { get; set; }
         }
 
