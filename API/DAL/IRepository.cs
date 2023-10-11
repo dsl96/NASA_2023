@@ -5,12 +5,13 @@ namespace API.DAL
 
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<IEnumerable<TEntity>> GetAllAsync(
-        Expression<Func<TEntity, bool>> filter = null,
-        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-        List<Expression<Func<TEntity, object>>> includeProperties = null,
-        int? skip = null,
-        int? take = null);
+         Task<IEnumerable<TEntity>> GetAllAsync(
+            List<Expression<Func<TEntity, bool>>> filters = null,
+            Expression<Func<TEntity, object>> orderBy = null,
+            bool reverseOrder = false,
+            List<Expression<Func<TEntity, object>>> includeProperties = null,
+            int? skip = null,
+            int? take = null);
 
         Task<TEntity> GetByIdAsync(int id);
         Task InsertAsync(TEntity entity);

@@ -16,7 +16,7 @@ namespace API.DAL.imlementations
             _dbSet = _context.Set<TEntity>();
         }
 
-     
+
 
         public async Task<TEntity> GetByIdAsync(int id)
         {
@@ -53,27 +53,38 @@ namespace API.DAL.imlementations
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync(
-         Expression<Func<TEntity, bool>> filter = null,
-         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-        List<Expression<Func<TEntity, object>>> includeProperties = null,
-        int? skip = null,
-        int? take = null)
+             List<Expression<Func<TEntity, bool>>> filters = null,
+             Expression<Func<TEntity, object>> orderBy = null,
+             bool reverseOrder = false,
+             List<Expression<Func<TEntity, object>>> includeProperties = null,
+             int? skip = null,
+             int? take = null)
         {
-            IQueryable<TEntity> query = _dbSet.AsNoTracking();  
+            IQueryable<TEntity> query = _dbSet.AsNoTracking();
 
             if (includeProperties != null)
             {
                 query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
             }
 
-            if (filter != null)
+            if (filters != null)
             {
-                query = query.Where(filter);
+                foreach (var filter in filters)
+                {
+                    query = query.Where(filter);
+                }
             }
 
             if (orderBy != null)
             {
-                query = orderBy(query);
+                if (reverseOrder)
+                {
+                    query = query.OrderByDescending(orderBy);
+                }
+                else
+                {
+                    query = query.OrderBy(orderBy);
+                }
             }
 
             if (skip.HasValue)
@@ -89,11 +100,13 @@ namespace API.DAL.imlementations
             return await query.ToListAsync();
         }
 
+
+
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }
 
-      
+
     }
 }

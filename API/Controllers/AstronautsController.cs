@@ -19,9 +19,9 @@ namespace API.Controllers
         }
 
         [HttpGet("getList")]
-        public async  Task<ActionResult<IEnumerable<AstronautResponse>>> GetAstronauts()
+        public async  Task<ActionResult<IEnumerable<AstronautResponse>>> GetAstronauts(int skip=0, int take=10)
         {
-            var astronauts = await _astonutsService.GetAstronauts();
+            var astronauts = await _astonutsService.GetAstronauts(skip:skip, take:take);
             return Ok(astronauts);  
         }
 

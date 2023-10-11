@@ -1,7 +1,10 @@
 ﻿using API.DAL;
 using API.Migrations;
 using DATA_CLASSES;
+using System.Formats.Asn1;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Xml;
 
 namespace API.services.implementation
 {
@@ -14,20 +17,24 @@ namespace API.services.implementation
             _astronautsRepo = repository;
         }
 
-        public async Task<IEnumerable<AstronautResponse>> GetAstronauts()
+        public async Task<IEnumerable<AstronautResponse>> GetAstronauts(int skip = 0, int take = int.MaxValue)
         {
 
+            
             var includeProperties = new List<Expression<Func<AstronautResponse, object>>>
             {
               astronaut =>  astronaut.agency
             };
 
-          //  Expression<Func<AstronautResponse, bool>> filter = astronaut => astronaut.agency.id == 1 ;
+          //  Expression<Func<AstronautResponse, object>> orderBy = a =>  a.date_of_birth;
 
-            return await _astronautsRepo.GetAllAsync(skip: 30,
-                                                     take: 25, 
+            List<Expression<Func<AstronautResponse, bool>>> filterExpression =new() { astronaut => astronaut.age  < 40 };
+
+
+            return await _astronautsRepo.GetAllAsync(skip: skip,
+                                                     take: take, 
                                                      includeProperties: includeProperties
-                                                     );
+                                                     ,filters: filterExpression);
         }
     }
 }
