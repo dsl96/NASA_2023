@@ -72,15 +72,21 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="command\RefreshISScomand.cs" />
+    <Compile Include="command\RelayCommand.cs" />
     <Compile Include="converters\UrlToImageConverter.cs" />
     <Compile Include="MVVM\Model\AstronautResponse.cs" />
     <Compile Include="MVVM\Model\IssLocationResponse.cs" />
     <Compile Include="MVVM\Model\IssPosiotion.cs" />
+    <Compile Include="MVVM\ViewModel\AstronautsListVM.cs" />
     <Compile Include="MVVM\ViewModel\ISSlocationVM.cs" />
     <Compile Include="MVVM\View\UserControlls\AstronautListUserControl\AstronautListUserControl.xaml.cs">
       <DependentUpon>AstronautListUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="services\IAstronautsGenerator.cs" />
+    <Compile Include="services\IAstronautsClient.cs" />
     <Compile Include="services\IIssClient.cs" />
+    <Compile Include="services\implementation\AstronautsClient.cs" />
+    <Compile Include="services\implementation\AstronautsGenerator.cs" />
     <Compile Include="services\implementation\IssClient.cs" />
     <Compile Include="MVVM\View\UserControlls\DailyImageUserControl\DailyImgUserControl.xaml.cs">
       <DependentUpon>DailyImgUserControl.xaml</DependentUpon>
@@ -145,7 +151,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\images\earth.png" />
+    <Resource Include="resources\images\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\images\earth.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
