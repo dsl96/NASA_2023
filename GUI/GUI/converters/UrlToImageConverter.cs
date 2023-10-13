@@ -54,7 +54,7 @@ namespace GUI.converters
             BitmapImage image = new BitmapImage();
             image.BeginInit();
             image.UriSource = new Uri(url);
-            image.CacheOption = BitmapCacheOption.None;
+            image.CacheOption = BitmapCacheOption.OnLoad;
             image.EndInit();
             return image;
         }

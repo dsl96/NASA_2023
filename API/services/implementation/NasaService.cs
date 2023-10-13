@@ -10,6 +10,7 @@ namespace API.services.implementation
     {
 
         string IMAGE_ENDPOINT = "planetary/apod";
+        private readonly  string ASTROID_ENDPOINT = "neo/rest/v1/feed";
         string API_KEY;
 
 
@@ -55,7 +56,7 @@ namespace API.services.implementation
                 if (dailyImage == null)
                 {
                     _logger.LogInformation("createDailyImage returned null.");
-                    return null;
+                    return null!;
                 }
 
                 try
@@ -79,18 +80,27 @@ namespace API.services.implementation
 
             return dailyImage;
         }
+        
+        public async Task<AstroidResponse> GetAastroidList(DateTime startDate, DateTime endDate)
+        {
+            var response = await _client.GetAsync(ASTROID_ENDPOINT + $"?start_date={startDate.ToString("yyyy-MM-dd")}&end_date={endDate.ToString("yyyy-MM-dd")}&api_key={API_KEY}");
+            if (!response.IsSuccessStatusCode)
+                return null!;
+            return JsonConvert.DeserializeObject<AstroidResponse>(await response.Content.ReadAsStringAsync())!;
+        }
+
         private async Task<NasaDailyImageResponse> createDailyImage(DateTime dateTime)
         {
-
-
             string date = dateTime.ToString("yyyy-MM-dd");
 
             var response = await _client.GetAsync(IMAGE_ENDPOINT + $"?api_key={API_KEY}&date={date}");
 
             if (!response.IsSuccessStatusCode)
-                return null;
+                return null!;
 
             return JsonConvert.DeserializeObject<NasaDailyImageResponse>(await response.Content.ReadAsStringAsync())!;
         }
+
+
     }
 }

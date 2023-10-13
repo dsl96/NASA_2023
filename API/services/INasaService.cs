@@ -8,5 +8,7 @@ namespace API.services
     public interface INasaService
     {
         public Task<NasaDailyImageResponse> GetDailyImage(DateTime? dateTime = null);
+
+        public Task<AstroidResponse> GetAastroidList(DateTime startDate, DateTime endDate);
     }
 }

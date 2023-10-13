@@ -30,6 +30,12 @@ aml/themes"
                     <local:AstronautListUserControl/>
                 </Grid>
             </TabItem>
+
+            <TabItem Header="Astroid List">
+                <Grid>
+                    <local:AstroidListUserControl/>
+                </Grid>
+            </TabItem>
         </TabControl>
 
  

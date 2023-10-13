@@ -71,12 +71,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="command\RefreshAstroidListCommand.cs" />
     <Compile Include="command\RefreshISScomand.cs" />
+    <Compile Include="converters\DisplayEndDateByStart.cs" />
     <Compile Include="converters\UrlToImageConverter.cs" />
+    <Compile Include="MVVM\Model\AstroidResponseModel.cs" />
     <Compile Include="MVVM\Model\AstronautResponse.cs" />
     <Compile Include="MVVM\Model\IssLocationResponse.cs" />
     <Compile Include="MVVM\Model\IssPosiotion.cs" />
+    <Compile Include="MVVM\ViewModel\AstroidListVM.cs" />
     <Compile Include="MVVM\ViewModel\ISSlocationVM.cs" />
+    <Compile Include="MVVM\View\UserControlls\AstroidListUserControl\AstroidListUserControl.xaml.cs">
+      <DependentUpon>AstroidListUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\UserControlls\AstronautListUserControl\AstronautListUserControl.xaml.cs">
       <DependentUpon>AstronautListUserControl.xaml</DependentUpon>
     </Compile>
@@ -104,6 +111,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MVVM\View\UserControlls\AstroidListUserControl\AstroidListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\UserControlls\AstronautListUserControl\AstronautListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

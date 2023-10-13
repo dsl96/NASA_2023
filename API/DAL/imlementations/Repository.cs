@@ -4,8 +4,6 @@ using System.Linq.Expressions;
 
 namespace API.DAL.imlementations
 {
-
-
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly DbContext _context;

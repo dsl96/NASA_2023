@@ -29,10 +29,5 @@ namespace GUI.MVVM.View.UserControlls
             InitializeComponent();
             DataContext = vm;
         }
-
-        private void DatePicker_Opened(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

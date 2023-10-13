@@ -17,12 +17,14 @@
     <Grid Background="Black">
 
 
-        <Image Grid.Column="0" Source="{Binding IssLocation.imageData, Converter={StaticResource UrlToImageConverter}}">
+        <Image Grid.Column="0" 
+               Source="{Binding IssLocation.imageData ,
+            Converter={StaticResource UrlToImageConverter}}"/>
 
-        </Image>
 
 
-       
+
+
 
         <Button
         Content="{materialDesign:PackIcon  Refresh}"

@@ -20,7 +20,7 @@ namespace API.Controllers
 
 
         [HttpGet("Location")]
-        public async Task<ActionResult< IssLocationResponse>> GetIssLocation()
+        public async Task<ActionResult<AstroidResponse>> GetIssLocation()
         {
  
             var response =  await _issDataService.GetIssLocation();

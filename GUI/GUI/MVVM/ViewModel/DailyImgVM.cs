@@ -17,14 +17,13 @@ namespace GUI.Mvvm.VM
                 {
                     selectedDate = value;
                     ExecuteDateChangedCommand(value);
-                    OnPropertyChanged("SelectedDate");
-
+                    OnPropertyChanged(nameof(selectedDate));
                 }
             }
         }
 
-        private dailyImageResponse imageData;
 
+        private dailyImageResponse imageData;
         public dailyImageResponse ImageData
         {
             get { return imageData; }
@@ -38,6 +37,7 @@ namespace GUI.Mvvm.VM
             }
         }
 
+
         //the min date to choose image
         private DateTime _minDate;
         public DateTime MinDate
@@ -49,6 +49,7 @@ namespace GUI.Mvvm.VM
                 OnPropertyChanged(nameof(MinDate));
             }
         }
+
 
         //the max date to choose image
         private DateTime _maxDate;
@@ -62,7 +63,9 @@ namespace GUI.Mvvm.VM
             }
         }
 
+
         private readonly NasaClient dailyImageService;
+
 
         public DailyImgVM()
         {
@@ -88,7 +91,6 @@ namespace GUI.Mvvm.VM
         private async Task UpdateImageData(DateTime date)
         {
             var response = await dailyImageService.GetDailyImage(date);
-
             //TODO check video
 
             if (response != null)
