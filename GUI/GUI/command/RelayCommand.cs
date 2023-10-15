@@ -9,14 +9,8 @@ namespace GUI.command
 {
     public class RelayCommand : ICommand
     {
-        private readonly Action _execute;
-        private readonly Func<bool> _canExecute;
-
-        public RelayCommand(Action execute, Func<bool> canExecute = null)
-        {
-            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute;
-        }
+        private readonly Action<object> execute;
+        private readonly Predicate<object> canExecute;
 
         public event EventHandler CanExecuteChanged
         {
@@ -24,15 +18,20 @@ namespace GUI.command
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
+        {
+            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            this.canExecute = canExecute;
+        }
+
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute();
+            return canExecute == null || canExecute(parameter);
         }
 
         public void Execute(object parameter)
         {
-            _execute();
+            execute(parameter);
         }
     }
-
 }

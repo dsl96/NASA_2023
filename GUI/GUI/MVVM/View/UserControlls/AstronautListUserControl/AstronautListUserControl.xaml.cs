@@ -26,13 +26,14 @@ namespace GUI.MVVM.View.UserControlls
     /// </summary>
     public partial class AstronautListUserControl : UserControl  
     {
-        private bool isDialogOpen;
+ 
         
         public AstronautListUserControl()
         {
             InitializeComponent();
             DataContext = new AstronautsListVM();
-        }  
+        }
+ 
     }
    
 }

@@ -28,13 +28,13 @@ namespace API.services.implementation
 
           //  Expression<Func<AstronautResponse, object>> orderBy = a =>  a.date_of_birth;
 
-            List<Expression<Func<AstronautResponse, bool>>> filterExpression =new() { astronaut => astronaut.age  < 40 };
+          //  List<Expression<Func<AstronautResponse, bool>>> filterExpression =new() { astronaut => astronaut.in_space==true };
 
 
             return await _astronautsRepo.GetAllAsync(skip: skip,
                                                      take: take, 
                                                      includeProperties: includeProperties
-                                                     ,filters: filterExpression);
+                                                     );
         }
     }
 }

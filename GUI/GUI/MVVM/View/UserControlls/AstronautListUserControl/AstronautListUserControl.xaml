@@ -5,12 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:converters="clr-namespace:GUI.converters" 
+             xmlns:local="clr-namespace:GUI.MVVM.View.UserControlls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
     <UserControl.Resources>
-        
+
         <converters:UrlToImageConverter x:Key="UrlToImageConverter"/>
+        <converters:NullBooleanToVisibilityConverter x:Key="NullBooleanToVisibilityConverter"/>
+        <converters:BooleanToColorConverter  x:Key="BooleanToColorConverter"/>
+        <converters:DurationConverter  x:Key="DurationConverter"/>
 
         <Style x:Key="CardStyle" TargetType="Button">
             <Style.Triggers>
@@ -26,36 +30,52 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
+        <Style TargetType="Button" x:Key="HyperlinkStyledButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Foreground="DodgerBlue"
+                   Text="{TemplateBinding Content}"
+                   TextDecorations="Underline" 
+                   Cursor="Hand" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
 
 
     <UserControl.Background>
         <ImageBrush ImageSource="\resources\images\earth.jpg" Stretch="Fill" />
     </UserControl.Background>
-    
+
     <Grid >
 
-        <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            
+        <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+
             <StackPanel>
                 <ItemsControl ItemsSource="{Binding  Astronauts}"  >
                     <ItemsControl.ItemsPanel>
-                        
+
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
-                        
+
                     </ItemsControl.ItemsPanel>
-                    
+
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button   Width="150" Opacity="0.9" Background="Transparent" Cursor="Hand" BorderThickness="0" BorderBrush="Gray"  Height="300"  Margin="20" Style="{StaticResource CardStyle}">
+                            <Button   Width="150" Opacity="0.9" Background="Transparent" Cursor="Hand" BorderThickness="0" BorderBrush="Gray"  Height="300"  Margin="20" Style="{StaticResource CardStyle}" 
+                                       Command="{Binding DataContext.ShowAstronautDetailsCommand,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type  UserControl}}}"
+                                     CommandParameter="{Binding}"  >
 
                                 <materialDesign:Card Width="150" Height="300"  >
 
                                     <Grid  Background ="{Binding ImageURL, Converter={StaticResource UrlToImageConverter} }" >
-                                        
+
                                         <Grid.RowDefinitions>
                                             <RowDefinition  Height="140" />
                                             <RowDefinition  Height="*" />
@@ -71,16 +91,12 @@
                                                    Style="{StaticResource MaterialDesignBody1TextBlock}"
                                                    Text="{Binding name}"
                                                    TextWrapping="Wrap" />
-                                            
+
+
                                             <TextBlock
                                                    VerticalAlignment="Center" Foreground="WhiteSmoke"
                                                    Style="{StaticResource MaterialDesignBody1TextBlock}"
-                                                   Text="{Binding  age}"
-                                                   TextWrapping="Wrap" />
-                                            <TextBlock
-                                                   VerticalAlignment="Center" Foreground="WhiteSmoke"
-                                                   Style="{StaticResource MaterialDesignBody1TextBlock}"
-                                                   Text="{Binding   date_of_birth}"
+                                                   Text="{Binding   date_of_birth , StringFormat='{}{0:d}'}"
                                                    TextWrapping="Wrap" />
 
                                         </StackPanel>
@@ -92,18 +108,100 @@
                     </ItemsControl.ItemTemplate>
 
                 </ItemsControl>
-                <Button Content="load more" Command="{Binding GetMoreAstronauts}" Background="Yellow" Margin="100,10,100,15" Opacity="0.8"  />
+                <Button Content="load more" Command="{Binding GetMoreAstronautsCommand}" Background="Yellow" Margin="100,10,100,15" Opacity="0.8"  />
             </StackPanel>
         </ScrollViewer>
 
-        <materialDesign:DialogHost IsOpen="{Binding IsDialogOpen}" CloseOnClickAway="True">
-            
+        <materialDesign:DialogHost IsOpen="{Binding  IsShowDetails}" CloseOnClickAway="True">
+
             <materialDesign:DialogHost.DialogContent>
-                
-                <Grid Margin="20">
-                    <TextBlock Text="My first Dialog" />
+                <!--<local:AstronaoutDetailsUserControl Astronaut="{Binding SelectedAstronaut}"></local:AstronaoutDetailsUserControl>-->
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Width="400" Height="700" Source="{Binding  SelectedAstronaut.profile_image, Converter={StaticResource UrlToImageConverter}}"/>
+
+                    <StackPanel Grid.Column="1" Margin="10">
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding SelectedAstronaut.name}" FontWeight="Bold" FontSize="18" Margin="0,0,7,5"/>
+                            <materialDesign:PackIcon Kind="Brightness1" Foreground="{Binding SelectedAstronaut.in_space ,Converter={StaticResource  BooleanToColorConverter}}" Width="15" VerticalAlignment="Center" ToolTip="IN SPACE"/>
+
+
+                        </StackPanel>
+
+                        <TextBlock Text="{Binding SelectedAstronaut.nationality}" Margin="0,0,0,5"/>
+
+
+
+                        <StackPanel Margin="0,20,0,10" Orientation="Horizontal">
+
+                            <StackPanel>
+                                <TextBlock Text="BIRTH DATE:" />
+                                <TextBlock Text="{Binding SelectedAstronaut.date_of_birth , StringFormat='{}{0:d}'}" Margin="0,0,0,5"/>
+                            </StackPanel>
+
+                            <StackPanel Margin="60,0,0,0">
+                                <TextBlock Text="DEATH DATE:" />
+                                <TextBlock Text="{Binding SelectedAstronaut.date_of_death, StringFormat='{}{0:d}'}" Margin="0,0,0,5"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <TextBlock Text="{Binding SelectedAstronaut.bio}" Background="Black" Opacity="0.5" Padding="10" TextWrapping="Wrap" Margin="0,0,0,5"/>
+
+
+
+                        <StackPanel Orientation="Vertical" Margin="0,20,0,0" Background="Black" Opacity="0.5" >
+
+                        <StackPanel Orientation="Horizontal">
+                                <TextBlock Text=" TIME IN SPACE : " />
+                                <TextBlock Text="{Binding SelectedAstronaut.time_in_space   ,Converter={StaticResource DurationConverter}}" Margin="0,0,0,5"/>
+                          </StackPanel> 
+                            
+                           <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="FLIGHT COUNT : " />
+                                <TextBlock Text="{Binding SelectedAstronaut.flights_count }" Margin="0,0,0,5"/>
+                          </StackPanel>
+                            
+                           <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="SPACEWALKS COUNT : " />
+                                <TextBlock Text="{Binding SelectedAstronaut.spacewalks_count }" Margin="0,0,0,5"/>
+                          </StackPanel>
+
+                        </StackPanel>
+
+
+                        <StackPanel Margin="0,10,0,10" Orientation="Horizontal">
+                            <Button Command="{Binding OpenLinkCommand}" Content="wiki" Visibility="{Binding SelectedAstronaut.wiki ,Converter={StaticResource NullBooleanToVisibilityConverter}}"
+                                   Style="{StaticResource HyperlinkStyledButton}" CommandParameter="{Binding SelectedAstronaut.wiki}"/>
+
+                            <Button Command="{Binding OpenLinkCommand}" Content="twiter" Visibility="{Binding SelectedAstronaut.twitter ,Converter={StaticResource NullBooleanToVisibilityConverter}}"
+                                   Style="{StaticResource HyperlinkStyledButton}" CommandParameter="{Binding SelectedAstronaut.twitter}" Margin="10,0,10,0"/>
+
+                            <Button Command="{Binding OpenLinkCommand}" Content="instagram" Visibility="{Binding SelectedAstronaut.instagram,Converter={StaticResource NullBooleanToVisibilityConverter}}"
+                                   Style="{StaticResource HyperlinkStyledButton}" CommandParameter="{Binding SelectedAstronaut.instagram}"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Margin="10">
+                        <Image   Width="200" Height="200"  Source="{Binding  SelectedAstronaut.agency.logo_url, Converter={StaticResource UrlToImageConverter}}" >
+                            <Image.ToolTip >
+                                <ToolTip Background="Transparent">
+                                    <TextBlock Text="{Binding SelectedAstronaut.agency.description}" Width="200" TextWrapping="Wrap" Background="Black" Foreground="White" Padding="10"/>
+
+                                </ToolTip>
+                            </Image.ToolTip>
+                        </Image>
+                        <TextBlock Text="{Binding SelectedAstronaut.agency.name}" FontWeight="Bold" Margin="0,10,0,0"/>
+                    </StackPanel>
                 </Grid>
-                
+
             </materialDesign:DialogHost.DialogContent>
 
         </materialDesign:DialogHost>
