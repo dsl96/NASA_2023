@@ -28,8 +28,11 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly AstroidListVM _vm;
         public MainWindow()
         {
+            _vm = new AstroidListVM();
+            this.DataContext= _vm;
             InitializeComponent();
         }
     }

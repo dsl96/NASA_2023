@@ -97,9 +97,9 @@
                   Grid.RowSpan="2"
                   FontSize="13"
                   ItemsSource="{Binding Source={StaticResource GroupData}}">
-            <ListView.View>
+            <ListView.View >
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}">
+                    <GridViewColumn DisplayMemberBinding="{Binding Key}">
                         <GridViewColumn.Header>
                             <GridViewColumnHeader>Name</GridViewColumnHeader>
                         </GridViewColumn.Header>
@@ -120,8 +120,7 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="More Information"
-                                        Tag="{Binding}"/>
+                                <Button Name="MoreInformation" Content="More Information" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -166,7 +165,10 @@
                     </GroupStyle.ContainerStyle>
                 </GroupStyle>
             </ListView.GroupStyle>
-
+            
         </ListView>
+        
     </Grid>
+
+
 </UserControl>
