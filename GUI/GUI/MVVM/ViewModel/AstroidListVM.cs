@@ -2,6 +2,7 @@
 using GUI.MVVM.Model;
 using GUI.services;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -90,9 +91,7 @@ namespace GUI.MVVM.ViewModel
             _response.NearEarthObjects.SelectMany(x => x.Value.Select(y => new
             {
                 Key = x.Key,
-                Name = y.Name,
-                EstimatedDiameterMax = y.EstimatedDiameter.Miles.EstimatedDiameterMax,
-                IsPotentiallyHazardousAsteroid = y.IsPotentiallyHazardousAsteroid
+                Value = y
             })).ToList().ForEach(x =>
             {
                 Application.Current.Dispatcher.Invoke(() => { DataAstroidList.Add(x); });

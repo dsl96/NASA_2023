@@ -46,8 +46,9 @@
                     </Style>
                 </DatePicker.CalendarStyle>
             </DatePicker>
-
-            <ScrollViewer  Grid.Row="1">
+            
+            <ScrollViewer  Grid.Row="1"
+                           PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
                 <TextBlock
                      Style="{StaticResource MaterialDesignButtonTextBlock}"
                      Text="{Binding ImageData.Explanation}" 

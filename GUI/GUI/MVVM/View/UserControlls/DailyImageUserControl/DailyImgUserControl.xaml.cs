@@ -22,12 +22,31 @@ namespace GUI.MVVM.View.UserControlls
     public partial class DailyImgUserControl : UserControl
     {
 
-       private  readonly DailyImgVM vm;
+        private readonly DailyImgVM vm;
         public DailyImgUserControl()
         {
             vm = new DailyImgVM();
             InitializeComponent();
             DataContext = vm;
+        }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scrollViewer = (ScrollViewer)sender;
+
+            if (e.Delta > 0)
+            {
+                // Scroll up
+                scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset - 10);
+            }
+            else
+            {
+                // Scroll down
+                scrollViewer.ScrollToVerticalOffset(scrollViewer.VerticalOffset + 10);
+            }
+
+            // Mark the event as handled to prevent the default scrolling behavior
+            e.Handled = true;
         }
     }
 }
