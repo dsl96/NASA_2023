@@ -3,29 +3,42 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xc:\users\david\source\repos\nasa_2023\gui\gui\mainwindow.xaml
+c:\users\david\source\repos\nasa_2023\gui\gui\mainwindow.xaml.cs
+aml/themes"
         xmlns:local="clr-namespace:GUI.MVVM.View.UserControlls"
         mc:Ignorable="d"
-        xmlns:converters="clr-namespace:GUI.converters"
         Title="MainWindow" Height="450" Width="800">
 
+
+
     <Grid>
-        <TabControl>
-            <TabItem>
-                <local:AstroidListUserControl/>
+        <TabControl Style="{StaticResource MaterialDesignFilledUniformTabControl}">
+            <TabItem Header="ISS">
+                <Grid>
+                    <local:IssTrackerUserControl/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Daily image">
+                <Grid>
+                    <local:DailyImgUserControl/>
+                </Grid>
             </TabItem>
 
-            <TabItem>
-                <local:AstronautListUserControl/>
+            <TabItem Header="Astronaut">
+                <Grid>
+                    <local:AstronautListUserControl/>
+                </Grid>
             </TabItem>
 
-            <TabItem>
-                <local:DailyImgUserControl/>
-            </TabItem>
-
-            <TabItem>
-                <local:IssTrackerUserControl/>
+            <TabItem Header="Astroid list">
+                <Grid>
+                    <local:AstroidListUserControl/>
+                </Grid>
             </TabItem>
         </TabControl>
+
+
+
     </Grid>
 </Window>
