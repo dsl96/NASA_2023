@@ -59,17 +59,11 @@ namespace GUI.MVVM.ViewModel
         public AstronautsListVM()
         {
             ShowAstronautDetailsCommand = new RelayCommand(showAstronautDetails);
-            GetMoreAstronautsCommand = new RelayCommand(addAstronaouts, canAddAstronauts);
+            GetMoreAstronautsCommand = new RelayCommand(addAstronaouts);
             OpenLinkCommand = new RelayCommand(OpenLink);
 
             _astronautsGenerator = new AstronautsGenerator(20);
             Astronauts = new ObservableCollection<AstronautResponse>();
-        }
-
-
-        private bool canAddAstronauts(object parameter)
-        {
-            return true;
         }
 
         private async void addAstronaouts(object parameter)
@@ -85,7 +79,6 @@ namespace GUI.MVVM.ViewModel
 
         private   void showAstronautDetails(object parameter)
         {
-            SelectedAstronaut = null;
             SelectedAstronaut = (AstronautResponse)parameter;
             IsShowDetails = true;
         }
