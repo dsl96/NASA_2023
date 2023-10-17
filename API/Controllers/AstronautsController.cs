@@ -12,16 +12,22 @@ namespace API.Controllers
     public class AstronautsController : ControllerBase
     {
 
-        private readonly IAstonutsService _astonutsService;
-        public AstronautsController(IAstonutsService astonutsService)
+        private readonly IAstronautsService _astonutsService;
+        public AstronautsController(IAstronautsService astonutsService)
         {
             _astonutsService = astonutsService;
         }
 
         [HttpGet("getList")]
-        public async  Task<ActionResult<IEnumerable<AstronautResponse>>> GetAstronauts(int skip=0, int take=10)
+        public async  Task<ActionResult<IEnumerable<AstronautResponse>>> GetAstronauts([FromQuery] AstronautFilter filter)
         {
-            var astronauts = await _astonutsService.GetAstronauts(skip:skip, take:take);
+
+            if(!ModelState.IsValid)
+            {
+               return BadRequest(ModelState);
+            }
+
+            var astronauts = await _astonutsService.GetAstronauts(filter);
             return Ok(astronauts);  
         }
 

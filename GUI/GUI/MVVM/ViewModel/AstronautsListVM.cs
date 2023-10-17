@@ -89,10 +89,7 @@ namespace GUI.MVVM.ViewModel
             SelectedAstronaut = (AstronautResponse)parameter;
             IsShowDetails = true;
         }
-
-      
-          
-      
+    
 
         private void OpenLink(object parameter)
         {

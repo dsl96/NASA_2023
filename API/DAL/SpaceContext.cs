@@ -16,6 +16,7 @@ namespace API.DAL
 
         public DbSet<NasaDailyImageResponse> NasaDailyImages { get; set; }
         public DbSet<AstronautResponse>  Astronauts { get; set; }
+      //  public DbSet<Agency> Agencies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

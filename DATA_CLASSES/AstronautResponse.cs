@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Xml;
+using System.Data.SqlTypes;
 
 namespace DATA_CLASSES
 {
@@ -19,7 +21,7 @@ namespace DATA_CLASSES
         public string name { get; set; }
         public Status? status { get; set; }
         public bool? in_space { get; set; }
-        public string? time_in_space { get; set; }
+     
         public string? eva_time { get; set; }
         public int? age { get; set; }
         public DateTime? date_of_birth { get; set; }
@@ -37,6 +39,19 @@ namespace DATA_CLASSES
         public int? spacewalks_count { get; set; }
         public DateTime? last_flight { get; set; }
         public DateTime? first_flight { get; set; }
+
+        public string? time_in_space { get; set; }
+
+        public TimeSpan? TimeSpanInSpace
+        {
+            get
+            {
+                if (time_in_space == null)
+                    return null;
+
+                return XmlConvert.ToTimeSpan(time_in_space);
+            }
+        }
     }
     public class Agency
     {

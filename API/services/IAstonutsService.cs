@@ -2,8 +2,8 @@
 
 namespace API.services
 {
-    public interface IAstonutsService
+    public interface IAstronautsService
     {
-        Task<IEnumerable<AstronautResponse>> GetAstronauts(int skip = 0, int take = int.MaxValue);
+        Task<IEnumerable<AstronautResponse>> GetAstronauts( AstronautFilter filter);
     }
 }

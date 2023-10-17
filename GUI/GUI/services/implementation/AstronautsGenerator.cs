@@ -29,7 +29,11 @@ namespace GUI.services.implementation
 
         public async Task<IEnumerable<AstronautResponse>> GetMoreAstronauts()
         {
-            var astronautList = await _astronautsClient.GetAstronaouts(_take, _skip);
+ 
+            int oldSkip = _skip;
+
+            this._skip +=   this._take;
+            var astronautList = await _astronautsClient.GetAstronaouts(_take, oldSkip);
 
             if (astronautList != null)
             {

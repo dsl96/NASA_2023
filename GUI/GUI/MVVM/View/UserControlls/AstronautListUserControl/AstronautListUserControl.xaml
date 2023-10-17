@@ -164,14 +164,24 @@
                           </StackPanel> 
                             
                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="FLIGHT COUNT : " />
+                                <TextBlock Text="FLIGHTS : " />
                                 <TextBlock Text="{Binding SelectedAstronaut.flights_count }" Margin="0,0,0,5"/>
                           </StackPanel>
                             
                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="SPACEWALKS COUNT : " />
+                                <TextBlock Text="SPACEWALKS : " />
                                 <TextBlock Text="{Binding SelectedAstronaut.spacewalks_count }" Margin="0,0,0,5"/>
                           </StackPanel>
+
+                            <StackPanel  Orientation="Horizontal" Visibility="{Binding SelectedAstronaut.first_flight ,Converter={StaticResource NullBooleanToVisibilityConverter}}">
+                                <TextBlock Text="FIRST FLIGHT:" />
+                                <TextBlock Text="{Binding SelectedAstronaut.first_flight, StringFormat='{}{0:d}'}" Margin="0,0,0,5"/>
+                            </StackPanel> 
+                            
+                            <StackPanel  Orientation="Horizontal" Visibility="{Binding SelectedAstronaut.first_flight ,Converter={StaticResource NullBooleanToVisibilityConverter}}">
+                                <TextBlock Text="LAST FLIGHT:" />
+                                <TextBlock Text="{Binding SelectedAstronaut.last_flight, StringFormat='{}{0:d}'}" Margin="0,0,0,5"/>
+                            </StackPanel>
 
                         </StackPanel>
 
