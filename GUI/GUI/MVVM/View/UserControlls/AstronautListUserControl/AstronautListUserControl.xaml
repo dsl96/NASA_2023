@@ -252,17 +252,20 @@
                          Style="{StaticResource MaterialDesignDiscreteSlider}"
                          TickFrequency="1"  />
 
-
+                    <StackPanel >
+                        
                     <ComboBox
                           ItemsSource="{Binding  AstronautFilter.OrderByOptions}"
                           SelectedItem="{Binding  AstronautFilter.OrderBy}"
                           Width="90"
-                          Margin="0,0,0,25"
+                          Margin="0,0,0,10"
                           Foreground="Yellow"
                           materialDesign:HintAssist.Hint="ORDER BY"
                           Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 
-                    <ToggleButton  Width="50" Margin="0,10,0,25" IsChecked="{Binding AstronautFilter.IsInSpace}"
+                        <TextBlock Text="REVESRE ORDER" HorizontalAlignment="Center" />
+
+                        <ToggleButton  Width="50" Margin="0,10,0,25" IsChecked="{Binding AstronautFilter.Reverse}"
                                    Style="{StaticResource MaterialDesignSwitchToggleButton}" >
                         <materialDesign:ToggleButtonAssist.SwitchTrackOnBackground>
                             <SolidColorBrush
@@ -274,6 +277,8 @@
                                       Color="Red" />
                         </materialDesign:ToggleButtonAssist.SwitchTrackOffBackground>
                     </ToggleButton>
+
+                    </StackPanel>
 
 
 
