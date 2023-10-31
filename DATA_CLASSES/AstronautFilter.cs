@@ -22,9 +22,28 @@ namespace DATA_CLASSES
         public bool? IsInSpace { get; set; }
         public bool? IsAlive { get; set; }
 
-        public string? AgencyName { get; set; }
+        public string? AgencyAbbrev { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "The field {0} must be greater than or equal to 0.")]
-        public int? MinDaysInSpace { get; set; }
+        public int? MinSpaceWalk { get; set; }
+        public int? MinFlights { get; set; }
+
+        public string? OrderBy { get; set; }
+
+        public static readonly  IEnumerable<string> OrderByOptions = new List<string>
+        {
+         
+        "age",
+        "spaceWalks",
+        "flights",
+        };
+
+        public bool Reverse { get; set; }
+
+        public   bool IsValidOrderBy()
+        {
+            return string.IsNullOrEmpty(OrderBy)  || OrderByOptions.Contains(OrderBy);
+        }
+
     }
 }

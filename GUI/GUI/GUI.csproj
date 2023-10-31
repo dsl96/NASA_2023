@@ -77,6 +77,7 @@
     <Compile Include="converters\DurationConverter.cs" />
     <Compile Include="converters\NullBooleanToVisibilityConverter.cs" />
     <Compile Include="converters\UrlToImageConverter.cs" />
+    <Compile Include="MVVM\Model\AstronautFilter.cs" />
     <Compile Include="MVVM\Model\AstronautResponse.cs" />
     <Compile Include="MVVM\Model\IssLocationResponse.cs" />
     <Compile Include="MVVM\Model\IssPosiotion.cs" />

@@ -9,6 +9,6 @@ namespace GUI.services
 {
     internal interface IAstronautsClient
     {
-        Task<IEnumerable<AstronautResponse>> GetAstronaouts(int take, int skip = 0);
+        Task<IEnumerable<AstronautResponse>> GetAstronaouts( AstronautFilter filter);
     }
 }

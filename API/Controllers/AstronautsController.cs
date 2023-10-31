@@ -27,6 +27,12 @@ namespace API.Controllers
                return BadRequest(ModelState);
             }
 
+            if (!filter.IsValidOrderBy())
+            {
+                string validOptions = string.Join(", ", AstronautFilter.OrderByOptions);
+                return BadRequest($"Invalid value for OrderBy. Valid options are: {validOptions}.");
+            }
+
             var astronauts = await _astonutsService.GetAstronauts(filter);
             return Ok(astronauts);  
         }

@@ -17,6 +17,8 @@ namespace GUI.MVVM.ViewModel
         public ICommand GetMoreAstronautsCommand { get; set; }
         public ICommand ShowAstronautDetailsCommand { get; set; }
         public ICommand OpenLinkCommand { get; private set; }
+        public ICommand RestartListCommand { get; private set; }
+        public ICommand RestartFilterCommand { get; private set; }
 
 
         private IAstronautsGenerator _astronautsGenerator;
@@ -54,6 +56,17 @@ namespace GUI.MVVM.ViewModel
                 _selectedAstronaut = value;
                 OnPropertyChanged(nameof(SelectedAstronaut));
             }
+        }    
+        
+        private AstronautFilter _astronautFilter;
+        public AstronautFilter AstronautFilter
+        {
+            get { return _astronautFilter; }
+            set
+            {
+                _astronautFilter = value;
+                OnPropertyChanged(nameof(AstronautFilter));
+            }
         }
 
         public AstronautsListVM()
@@ -61,9 +74,23 @@ namespace GUI.MVVM.ViewModel
             ShowAstronautDetailsCommand = new RelayCommand(showAstronautDetails);
             GetMoreAstronautsCommand = new RelayCommand(addAstronaouts);
             OpenLinkCommand = new RelayCommand(OpenLink);
+            RestartListCommand = new RelayCommand(restarAstronautsList);
+            RestartFilterCommand= new RelayCommand(restartFilter);
 
-            _astronautsGenerator = new AstronautsGenerator(20);
+            _astronautFilter = new AstronautFilter() { Take = 20 };
+            _astronautsGenerator = new AstronautsGenerator(_astronautFilter);
             Astronauts = new ObservableCollection<AstronautResponse>();
+        }
+
+        private async void restarAstronautsList(object parameter)
+        {
+            this._astronautsGenerator = new AstronautsGenerator(this.AstronautFilter);
+            this.astronauts.Clear();
+            addAstronaouts(null);
+        }
+        private async void restartFilter(object parameter)
+        {
+            this.AstronautFilter = new AstronautFilter();
         }
 
         private async void addAstronaouts(object parameter)
