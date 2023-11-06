@@ -16,7 +16,8 @@
         <converters:BooleanToColorConverter  x:Key="BooleanToColorConverter"/>
         <converters:DurationConverter  x:Key="DurationConverter"/>
 
-        <Style x:Key="CardStyle" TargetType="Button">
+        <Style x:Key="CardStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Width" Value="190"/>
@@ -74,18 +75,17 @@
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            
-                            <Button Width="150" Opacity="0.9" Background="Transparent" Cursor="Hand" BorderThickness="0" BorderBrush="Gray" Height="230"    Margin="20" Style="{StaticResource CardStyle}" 
+
+                            <Button Width="150" Opacity="0.9"  Cursor="Hand" BorderThickness="0" BorderBrush="Gray" Height="245"    Margin="20" 
                                        Command="{Binding DataContext.ShowAstronautDetailsCommand,
-                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type  UserControl}}}"
-                                     CommandParameter="{Binding}" >
+                                       RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type  UserControl}}}"
+                                     CommandParameter="{Binding}"
+                                     Background="Gray"
+                                    
+                                      Style="{StaticResource CardStyle}">
 
-
-                                <materialDesign:Card Width="150" Height="230" >
-
-                                    <Grid >
-
-                                        <Grid.RowDefinitions>
+                                <Grid >
+                                    <Grid.RowDefinitions>
                                             <RowDefinition  Height="140" />
                                             <RowDefinition  Height="*" />
                                         </Grid.RowDefinitions>
@@ -103,7 +103,7 @@
                                         </StackPanel>
                                     </Grid>
 
-                                </materialDesign:Card>
+                                
                             </Button>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
