@@ -2,11 +2,15 @@
 using GUI.models;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using GUI.command;
 
 namespace GUI.Mvvm.VM
 {
     internal class DailyImgVM : ViewModelBase
     {
+        public ICommand  SetRandomDateCommand { get; set; }
+
         private DateTime selectedDate;
         public DateTime SelectedDate
         {
@@ -22,6 +26,7 @@ namespace GUI.Mvvm.VM
                 }
             }
         }
+
 
         private dailyImageResponse imageData;
 
@@ -71,6 +76,22 @@ namespace GUI.Mvvm.VM
             this.MaxDate = dailyImageService.MaxDate;
             this.MinDate = dailyImageService.MinDate;
             this.SelectedDate = _maxDate;
+
+            this.SetRandomDateCommand = new RelayCommand(setRandomDate);
+        }
+
+
+        private async void setRandomDate(object parameter)
+        {
+            DateTime newDate = RandomDateBetween(MinDate, MaxDate);
+            this.SelectedDate = newDate;
+        }
+
+        public static DateTime RandomDateBetween(DateTime startDate, DateTime endDate)
+        {
+            Random rand = new Random();
+            int range = (endDate - startDate).Days;
+            return startDate.AddDays(rand.Next(range));
         }
 
         private async void ExecuteDateChangedCommand(object parameter)

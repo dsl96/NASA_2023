@@ -3,32 +3,73 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:converters="clr-namespace:GUI.converters"
+             xmlns:converters="clr-namespace:GUI.converters" 
+              xmlns:local="clr-namespace:GUI.MVVM.View.UserControlls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
         <converters:UrlToImageConverter x:Key="UrlToImageConverter"/>
+        <converters:NullBooleanToVisibilityConverter x:Key="NullBooleanToVisibilityConverter"/>
+
+
     </UserControl.Resources>
 
-    <Grid Background="Black">
+    <UserControl.Background>
+        <ImageBrush ImageSource="\resources\images\stars.jpg" Stretch="Fill" />
+    </UserControl.Background>
+
+    <Grid  >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70*" />
-       
-            <ColumnDefinition  Width="30*"/>
-           
+            <ColumnDefinition Width="60*" />
+
+            <ColumnDefinition  Width="40*"/>
+
         </Grid.ColumnDefinitions>
 
-        <Image Grid.Column="0" Source="{Binding  ImageData.Url, Converter={StaticResource UrlToImageConverter} }"/>
 
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions >
-                <RowDefinition Height="30*"/>
-                <RowDefinition Height="70*"/>
-            </Grid.RowDefinitions>
 
-            <DatePicker Grid.Row="0" SelectedDate="{Binding SelectedDate}"
+        <Border BorderThickness="1" BorderBrush="White" Margin="0,10,0,10">
+            <Grid  Grid.Column="0"   >
+
+                <Image     Source="{Binding ImageData.Url, Converter={StaticResource UrlToImageConverter}}"
+           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Canvas>
+
+                    <materialDesign:PackIcon   Foreground="White" Kind="HighDefinitionBox" Canvas.Left="10" Canvas.Top="10" Width="50" Height="50" 
+                                                Visibility="{Binding ImageData.HdUrl ,Converter={StaticResource  NullBooleanToVisibilityConverter}}"/>
+                </Canvas>
+            </Grid>
+        </Border>
+
+
+
+
+
+       
+
+        <Border   Grid.Column="1" BorderThickness="1" BorderBrush="White" Margin="10,10,0,10">
+
+            <ScrollViewer>
+            
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center"  >
+
+
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,200" HorizontalAlignment="Center" >
+
+
+                    <Button
+                     Width="140"
+                        Height="50"
+                     Content="RANDOM"
+                     Style="{StaticResource MaterialDesignRaisedButton}"
+                     ToolTip="RANDOM DATE" Margin="0,0,10,0"
+                        materialDesign:ButtonAssist.CornerRadius="5"
+                        Command="{Binding  SetRandomDateCommand}"/>
+
+                    <DatePicker   SelectedDate="{Binding SelectedDate}"
                     DisplayDateStart="{Binding MinDate}"
                     DisplayDateEnd="{Binding MaxDate}"
                     Background="Gray"
@@ -38,24 +79,27 @@
                     materialDesign:HintAssist.Hint="Pick Date"
                     Style="{StaticResource MaterialDesignOutlinedDatePicker}"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center"                  
-                    Margin="0,10,10,10">
-                <DatePicker.CalendarStyle>
-                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
-                        <Setter Property="Background" Value="White" />
-                    </Style>
-                </DatePicker.CalendarStyle>
-            </DatePicker>
+                    VerticalAlignment="Center" >
+                        <DatePicker.CalendarStyle>
+                            <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                <Setter Property="Background" Value="White" />
+                            </Style>
+                        </DatePicker.CalendarStyle>
+                    </DatePicker>
 
-            <ScrollViewer  Grid.Row="1">
-                <TextBlock
+
+                </StackPanel>
+
+
+                <TextBlock Margin="40,0,40,0" Background="Black"
                      Style="{StaticResource MaterialDesignButtonTextBlock}"
                      Text="{Binding ImageData.Explanation}" 
                       Foreground="White"
                       TextWrapping="Wrap"/>
+
+            </StackPanel>
             </ScrollViewer>
-                
-        </Grid>
-      
+        </Border>
+
     </Grid>
 </UserControl>

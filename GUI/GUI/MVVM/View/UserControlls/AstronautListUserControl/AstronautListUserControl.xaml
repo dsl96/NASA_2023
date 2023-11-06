@@ -74,14 +74,16 @@
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button   Width="150" Opacity="0.9" Background="Transparent" Cursor="Hand" BorderThickness="0" BorderBrush="Gray"  Height="300"  Margin="20" Style="{StaticResource CardStyle}" 
+                            
+                            <Button Width="150" Opacity="0.9" Background="Transparent" Cursor="Hand" BorderThickness="0" BorderBrush="Gray" Height="230"    Margin="20" Style="{StaticResource CardStyle}" 
                                        Command="{Binding DataContext.ShowAstronautDetailsCommand,
                                 RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type  UserControl}}}"
-                                     CommandParameter="{Binding}"  >
+                                     CommandParameter="{Binding}" >
 
-                                <materialDesign:Card Width="150" Height="300"  >
 
-                                    <Grid  Background ="{Binding ImageURL, Converter={StaticResource UrlToImageConverter} }" >
+                                <materialDesign:Card Width="150" Height="230" >
+
+                                    <Grid >
 
                                         <Grid.RowDefinitions>
                                             <RowDefinition  Height="140" />
@@ -98,14 +100,6 @@
                                                    Style="{StaticResource MaterialDesignBody1TextBlock}"
                                                    Text="{Binding name}"
                                                    TextWrapping="Wrap" />
-
-
-                                            <TextBlock
-                                                   VerticalAlignment="Center" Foreground="WhiteSmoke"
-                                                   Style="{StaticResource MaterialDesignBody1TextBlock}"
-                                                   Text="{Binding   date_of_birth , StringFormat='{}{0:d}'}"
-                                                   TextWrapping="Wrap" />
-
                                         </StackPanel>
                                     </Grid>
 
@@ -115,7 +109,7 @@
                     </ItemsControl.ItemTemplate>
 
                 </ItemsControl>
-                <Button Content="load more" Command="{Binding GetMoreAstronautsCommand}" Background="Yellow" Margin="100,10,100,15" Opacity="0.8"  />
+                <Button Content="load more" Command="{Binding GetMoreAstronautsCommand}"  Margin="100,10,100,15" Opacity="0.8"  />
             </StackPanel>
         </ScrollViewer>
 
@@ -156,7 +150,7 @@
                             <DatePicker Grid.Row="0"   SelectedDate="{Binding AstronautFilter.MinBirthDate}"
                                         DisplayDateStart="{Binding MinDate}"
                                         DisplayDateEnd="{Binding MaxDate}"
-                                        BorderBrush="Yellow"
+                                       
                                         Width="120"     
                                         Foreground="White"
                                         materialDesign:HintAssist.Hint="Pick Date"
@@ -176,7 +170,6 @@
                             <DatePicker Grid.Row="0"    SelectedDate="{Binding AstronautFilter.MaxBirthDate}"
                                         DisplayDateStart="{Binding MinDate}"
                                         DisplayDateEnd="{Binding MaxDate}"
-                                        BorderBrush="Yellow"
                                         Width="120"     
                                         Foreground="White"
                                         materialDesign:HintAssist.Hint="Pick Date"
@@ -259,7 +252,7 @@
                           SelectedItem="{Binding  AstronautFilter.OrderBy}"
                           Width="90"
                           Margin="0,0,0,10"
-                          Foreground="Yellow"
+                          
                           materialDesign:HintAssist.Hint="ORDER BY"
                           Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
 

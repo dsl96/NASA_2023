@@ -84,7 +84,7 @@ namespace GUI.MVVM.ViewModel
 
         private async void restarAstronautsList(object parameter)
         {
-            this._astronautsGenerator = new AstronautsGenerator(this.AstronautFilter);
+            this._astronautsGenerator = new AstronautsGenerator((AstronautFilter)this.AstronautFilter.Clone());
             this.astronauts.Clear();
             addAstronaouts(null);
         }
