@@ -79,18 +79,21 @@
                             <Button Width="150" Opacity="0.9"  Cursor="Hand" BorderThickness="0" BorderBrush="Gray" Height="245"    Margin="20" 
                                        Command="{Binding DataContext.ShowAstronautDetailsCommand,
                                        RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type  UserControl}}}"
-                                     CommandParameter="{Binding}"
-                                     Background="Gray"
-                                    
-                                      Style="{StaticResource CardStyle}">
+                                     CommandParameter="{Binding}"                                 
+                                    Style="{StaticResource CardStyle}"
+                                    Padding="0">
+
+                                <Button.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.8"/>
+                                </Button.Background>
 
                                 <Grid >
                                     <Grid.RowDefinitions>
                                             <RowDefinition  Height="140" />
-                                            <RowDefinition  Height="*" />
+                                            <RowDefinition  Height="100" />
                                         </Grid.RowDefinitions>
 
-                                        <Image Height="140"  Stretch="Uniform"  Source="{Binding   profile_image_thumbnail, 
+                                        <Image   Stretch="Uniform"  Source="{Binding   profile_image_thumbnail, 
                                                   Converter={StaticResource UrlToImageConverter} }"></Image>
 
                                         <StackPanel Grid.Row="1" Margin="8,24,8,4">
@@ -310,8 +313,7 @@
         <materialDesign:DialogHost IsOpen="{Binding  IsShowDetails}" CloseOnClickAway="True">
 
             <materialDesign:DialogHost.DialogContent>
-                <!--<local:AstronaoutDetailsUserControl Astronaut="{Binding SelectedAstronaut}"></local:AstronaoutDetailsUserControl>-->
-
+                
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
@@ -319,7 +321,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0" Width="400" Height="700" Source="{Binding  SelectedAstronaut.profile_image, Converter={StaticResource UrlToImageConverter}}"/>
+                    <Image Margin="10,10,0,10" Grid.Column="0" Width="400" Height="700" Source="{Binding  SelectedAstronaut.profile_image, Converter={StaticResource UrlToImageConverter}}"/>
 
                     <StackPanel Grid.Column="1" Margin="10">
 
