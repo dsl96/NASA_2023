@@ -38,24 +38,28 @@
                         <RowDefinition Height="95*"/>
                         <RowDefinition Height="5*"/>
                     </Grid.RowDefinitions>
-                
 
-                <Image  Grid.Row="0" Source="{Binding ImageData.Url, Converter={StaticResource UrlToImageConverter}}"
+
+                    <Image  Grid.Row="0" Source="{Binding ImageData.Url, Converter={StaticResource UrlToImageConverter}}"
                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                     <Canvas  Grid.Row="0">
 
-                    <materialDesign:PackIcon   Foreground="White" Kind="HighDefinitionBox" Canvas.Left="10" Canvas.Top="10" Width="50" Height="50" 
+                        <materialDesign:PackIcon   Foreground="White" Kind="HighDefinitionBox" Canvas.Left="10" Canvas.Top="10" Width="50" Height="50" 
                                                 Visibility="{Binding ImageData.HdUrl ,Converter={StaticResource  NullBooleanToVisibilityConverter}}"/>
-                
-                </Canvas>
+
+                    </Canvas>
 
 
                     <StackPanel Orientation="Horizontal"  Grid.Row="1">
                         <materialDesign:PackIcon   Foreground="White" Kind="Copyright"  
-                                                Visibility="{Binding ImageData.HdUrl ,Converter={StaticResource  NullBooleanToVisibilityConverter}}"/>
+                                                Visibility="{Binding ImageData.Copyright ,Converter={StaticResource  NullBooleanToVisibilityConverter}}"/>
 
-                        <TextBlock Text=" cla bla"></TextBlock>
+                        <TextBlock 
+                            Margin="10,0,0,0"
+                            Text="{Binding ImageData.Copyright}" 
+                            Foreground="White"
+                            TextWrapping="Wrap"/>
                     </StackPanel>
                 </Grid>
             </Grid>

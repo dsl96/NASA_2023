@@ -17,7 +17,7 @@ namespace GUI.services
 
         private readonly string IMAGE_ENDPOINT = "doron";
 
-        public readonly DateTime MinDate = new DateTime(1995, 1, 1);
+        public readonly DateTime MinDate = new DateTime(1996, 1, 1);
 
         //the max date to get daily image is the date in usa
         public  DateTime MaxDate => GetTimeInNewYork();
