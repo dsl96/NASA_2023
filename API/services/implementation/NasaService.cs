@@ -79,7 +79,7 @@ namespace API.services.implementation
 
             return dailyImage;
         }
-        private async Task<NasaDailyImageResponse> createDailyImage(DateTime dateTime)
+        private async Task<NasaDailyImageResponse?> createDailyImage(DateTime dateTime)
         {
 
 
@@ -90,7 +90,14 @@ namespace API.services.implementation
             if (!response.IsSuccessStatusCode)
                 return null;
 
-            return JsonConvert.DeserializeObject<NasaDailyImageResponse>(await response.Content.ReadAsStringAsync())!;
+            var dailyImg =  JsonConvert.DeserializeObject<NasaDailyImageResponse>(await response.Content.ReadAsStringAsync())!;
+
+            if(dailyImg != null)
+            {
+                dailyImg.Copyright = dailyImg.Copyright?.Trim().Replace("\n", " ");
+            }
+
+            return dailyImg;
         }
     }
 }
