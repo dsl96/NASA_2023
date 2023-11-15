@@ -5,7 +5,8 @@ using FireSharp;
 using System.Windows.Media.Imaging;
 using System.Numerics;
 using System.IO;
-
+using Firebase.Storage;
+using System.Windows.Forms;
 
 namespace API.DAL
 {
@@ -15,7 +16,8 @@ namespace API.DAL
 
         private readonly IFirebaseClient _client;
 
-        FireBase()
+        private readonly FirebaseStorage _storage;
+        public FireBase()
         {
             ifireBase = new FirebaseConfig()
             {
@@ -24,27 +26,29 @@ namespace API.DAL
                 BasePath = "https://nasa2023-507e6-default-rtdb.firebaseio.com/"
             };
 
+            _storage = new FirebaseStorage("https://nasa2023-507e6-default-rtdb.firebaseio.com/");
             _client = new FirebaseClient(ifireBase);
         }
 
+        public async Task UploadImageAsync(string imageData, string? storagePath = null)
+        {
+            try
+            {
+                byte[] imageBytes = Convert.FromBase64String(imageData);
 
-        //internal async Task InsertPictureAsync(string pictureName, string data)
-        //{
-        //    BitmapImage image = new BitmapImage()
+                using (var stream = new MemoryStream(imageBytes))
+                {
+                    // Upload the file to Firebase Storage
+                    var task = await _storage.Child(storagePath)
+                                              .PutAsync(stream);
 
-        //    image.BeginInit(); ;
-        //    if (Uri.TryCreate(data, UriKind.Absolute, out Uri uriResult) &&
-        //           (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps))
-        //        image.UriSource = new Uri(data);
-        //    else if ( data is byte[] bytes)
-        //        using (MemoryStream stream = new MemoryStream(bytes))
-        //            image.StreamSource = stream;
-
-        //    image.CacheOption = BitmapCacheOption.OnLoad;
-        //    image.EndInit();
-
-        //    SetResponse response = await _client.SetAsync(pictureName, data);
-
-        //}
+                    MessageBox.Show("File uploaded successfully");
+                }
+            }
+            catch (Exception ex)
+            {
+               MessageBox.Show($"Error uploading file: {ex.Message}");
+            }
+        }
     }
 }

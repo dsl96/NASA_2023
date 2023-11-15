@@ -10,7 +10,7 @@ namespace GUI.services
     internal interface IIssClient
     {
 
-        Task<IssLocationResponse> GetIssLocation();
+        Task<IssDataResponse> GetIssLocation();
         
     }
 }

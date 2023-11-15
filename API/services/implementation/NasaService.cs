@@ -17,7 +17,7 @@ namespace API.services.implementation
         private readonly HttpClient _client;
         private readonly IRepository<NasaDailyImageResponse> _dailyImageRepo;
         private readonly ILogger<NasaService> _logger;
-
+        private readonly FireBase _fireBase;
         public NasaService(HttpClient client, IConfiguration configuration, ILogger<NasaService> logger, IRepository<NasaDailyImageResponse> dailyImageRepo)
         {
 
@@ -30,11 +30,13 @@ namespace API.services.implementation
 
             this._client = client;
             this._logger = logger;
+            this._fireBase = new FireBase();
         }
 
 
         public async Task<NasaDailyImageResponse> GetDailyImage(DateTime? dateTime = null)
         {
+
 
             if (dateTime == null)
             {
@@ -45,7 +47,6 @@ namespace API.services.implementation
             var dateId = NasaDailyImageResponse.ConvertDateTimeToInt(dateTime.Value);
 
             var dailyImage = await _dailyImageRepo.GetByIdAsync(dateId);
- 
 
             //if not in db
             if (dailyImage == null)

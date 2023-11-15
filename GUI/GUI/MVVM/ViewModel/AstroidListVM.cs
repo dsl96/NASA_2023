@@ -7,44 +7,25 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace GUI.MVVM.ViewModel
 {
+
     public class AstroidListVM : ViewModelBase
     {
-        public DateTime MaxDate { set; get; }
+
+        /*********************************   Commnad   *******************************/
+        public ICommand ShowCloseApproachDataCommand { get; set; }
+        public ICommand OpenLinkCommand { get; set; }
+
+        public ICommand FilterCommand { get; set; }
 
 
-        private DateTime _startDate;
-        public DateTime StartDate
-        {
-            get { return _startDate; }
-            set
-            {
-                if (_startDate != value)
-                {
-                    _startDate = value;
+        /**********************************   Data   ***************************/
 
-                    OnPropertyChanged(nameof(StartDate));
-                }
-            }
-        }
-
-
-        private DateTime _endDate;
-        public DateTime EndDate
-        {
-            get { return _endDate; }
-            set
-            {
-                if (_endDate != value)
-                {
-                    _endDate = value;
-                    OnPropertyChanged(nameof(EndDate));
-                }
-            }
-        }
-
+        public ObservableCollection<KeyValuePair<string, NearEarthObject>> DataAstroidList { get; set; }
 
         private AstroidResponse _response;
         public AstroidResponse response
@@ -60,26 +41,100 @@ namespace GUI.MVVM.ViewModel
             }
         }
 
-        public ObservableCollection<dynamic> DataAstroidList { get; set; }
-        public RefreshAstroidListCommand refreshCommand { set; get; }
 
-        private readonly NasaClient _nasaService;
-
-        public AstroidListVM()
+        private bool _showDetails;
+        public bool ShowDetails
         {
-            this._startDate = DateTime.Now.AddDays(-6);
-            this._endDate = DateTime.Now;
-            this.MaxDate = DateTime.Now;
-            this._nasaService = new NasaClient();
-            Task.Run(() => DateChange()).Wait();
-            this.DataAstroidList = new ObservableCollection<dynamic>();
-            refreshCommand = new RefreshAstroidListCommand(this);
+            get { return _showDetails; }
+            set
+            {
+                _showDetails = value;
+                OnPropertyChanged(nameof(ShowDetails));
+            }
+        }
+
+        private List<CloseApproachData> _selected;
+        public List<CloseApproachData> Selected
+        {
+            get { return _selected; }
+            set
+            {
+                if (_selected != value)
+                {
+                    _selected = value;
+                    OnPropertyChanged(nameof(_selected));
+                }
+            }
         }
 
 
-        internal async void DateChange()
+        private Uri _sourceUrl;
+        public Uri SourceUrl
         {
-            response = await _nasaService.GetAstroidList(_startDate, _endDate);
+            get { return _sourceUrl; }
+            set
+            {
+                if (value != _sourceUrl)
+                {
+                    _sourceUrl = value;
+                    OnPropertyChanged(nameof(SourceUrl));
+                }
+            }
+        }
+
+        private AsteroidsFilter _asteroidsFilter { get; set; }
+        public AsteroidsFilter AsteroidsFilter
+        {
+            get { return _asteroidsFilter; }
+            set
+            {
+                if (_asteroidsFilter != value)
+                {
+                    _asteroidsFilter = value;
+                    OnPropertyChanged(nameof(AsteroidsFilter));
+                }
+            }
+        }
+
+
+        /**************************** Service *****************************/
+
+        private readonly NasaClient _nasaService;
+
+
+        /*************************** Constructor ***********************/
+        public AstroidListVM()
+        {
+
+            this._nasaService = new NasaClient();
+            this._asteroidsFilter = new AsteroidsFilter();
+            Task.Run(() => DateChange()).Wait();
+
+            this.DataAstroidList = new ObservableCollection<KeyValuePair<string, NearEarthObject>>();
+            FilterCommand = new RelayCommand(DateChange);
+            ShowCloseApproachDataCommand = new RelayCommand(ShowCloseApproachData);
+            OpenLinkCommand = new RelayCommand(OpenLink);
+            ShowDetails = false;
+            SourceUrl = new Uri("https://www.youtube.com/watch?v=rBr18UhT2fs");
+        }
+
+
+        /****************************** Methods ************************/
+
+        private bool CanExecute(object parameter)
+        {
+            return true;
+        }
+
+        private void ShowCloseApproachData(object parameter)
+        {
+            Selected = (List<CloseApproachData>)parameter;
+            ShowDetails = true;
+        }
+
+        public async void DateChange(object prameter = null)
+        {
+            response = await _nasaService.GetAstroidList(AsteroidsFilter.StartDate, AsteroidsFilter.EndDate);
             if (_response != null)
                 UpdateListByDispatcher();
         }
@@ -88,14 +143,23 @@ namespace GUI.MVVM.ViewModel
         {
             Application.Current.Dispatcher.Invoke(() => { DataAstroidList.Clear(); });
 
-            _response.NearEarthObjects.SelectMany(x => x.Value.Select(y => new
-            {
-                Key = x.Key,
-                Value = y
-            })).ToList().ForEach(x =>
+            _response.NearEarthObjects.SelectMany(x => x.Value.Select(y => new KeyValuePair<string, NearEarthObject>(
+                x.Key,
+                y
+            ))).ToList().ForEach(x =>
             {
                 Application.Current.Dispatcher.Invoke(() => { DataAstroidList.Add(x); });
             });
+        }
+
+        private void OpenLink(object parameter)
+        {
+            try
+            {
+                var uri = parameter as string;
+                System.Diagnostics.Process.Start(uri);
+            }
+            catch (Exception ex) { }
         }
 
     }

@@ -12,7 +12,7 @@ namespace API.services.implementation
         private readonly HttpClient _client;
         private readonly ILogger<issDataService> _logger;  
 
-        private readonly string IssLocationApiEndPoint = "http://api.open-notify.org/iss-now.json";
+        private readonly string IssLocationApiEndPoint = "https://api.wheretheiss.at/v1/satellites/25544";
 
         private readonly IWorldMapService _worldMapService;
 
@@ -47,7 +47,7 @@ namespace API.services.implementation
                 issData.dateTime = DateTime.Now;
 
                 //add image bytes (optional null)
-                var lonlat = new[] { (issData.iss_position.longitude, issData.iss_position.latitude) };
+                var lonlat = new[] { (issData.longitude, issData.latitude) };
                 issData.imageData = await _worldMapService.GetWorldMap(lonlat);
 
                 if (issData.imageData == null)

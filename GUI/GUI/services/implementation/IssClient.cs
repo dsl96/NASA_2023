@@ -23,14 +23,14 @@ namespace GUI.services.implementation
         }
 
 
-        public async Task<IssLocationResponse> GetIssLocation()
+        public async Task<IssDataResponse> GetIssLocation()
         {
             var response = await _client.GetAsync(ISS_LOCATION_ENDPOINT);
 
             if (!response.IsSuccessStatusCode)
                 return null;
-
-            return JsonConvert.DeserializeObject<IssLocationResponse>(await response.Content.ReadAsStringAsync());
+            var x= JsonConvert.DeserializeObject<IssDataResponse>(await response.Content.ReadAsStringAsync());
+            return x;
         }
 
     }

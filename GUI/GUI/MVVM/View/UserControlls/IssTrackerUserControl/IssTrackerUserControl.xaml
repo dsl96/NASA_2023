@@ -5,8 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUI.MVVM.View.UserControlls"
              xmlns:converters="clr-namespace:GUI.converters"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:media="clr-namespace:System.Windows.Media;assembly=PresentationCore"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={RelativeSource self}}"
              d:DesignHeight="450" d:DesignWidth="800">
 
 
@@ -14,25 +17,144 @@
         <converters:UrlToImageConverter x:Key="UrlToImageConverter"/>
     </UserControl.Resources>
 
-    <Grid Background="Black">
+    <Grid >
+        <!--<Image x:Name="backgroundImage" Stretch="UniformToFill">
+            <Image.Triggers>
+                <EventTrigger RoutedEvent="Image.Loaded">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="backgroundImage" Storyboard.TargetProperty="Source">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="C:\Users\David\source\repos\NASA_2023\GUI\GUI\resources\images\image1.jpg" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:5">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="C:\Users\David\source\repos\NASA_2023\GUI\GUI\resources\images\image2.jpg" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:10">
+                                        <DiscreteObjectKeyFrame.Value>
+                                            <BitmapImage UriSource="C:\Users\David\source\repos\NASA_2023\GUI\GUI\resources\images\image2.jpg" />
+                                        </DiscreteObjectKeyFrame.Value>
+                                    </DiscreteObjectKeyFrame>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Image.Triggers>
+        </Image>-->
+        <MediaElement Panel.ZIndex="-1" Source="C:\Users\David\source\repos\NASA_2023\GUI\GUI\resources\movies\ISSBackground.mpg"
+                      Stretch="Fill" 
+                      LoadedBehavior="Play" 
+                      UnloadedBehavior="Manual"  
+                      MediaEnded="PlayMedia"/>
+
+        <Grid Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
 
-        <Image Grid.Column="0" 
-               Source="{Binding IssLocation.imageData ,
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="0"
+                          Background="Transparent">
+                <TextBlock Text="{Binding Text}"
+                           Background="Transparent"
+                   HorizontalAlignment="Left" 
+                   Foreground="White"
+                   Height="auto"
+                   TextWrapping="Wrap"
+                   Margin="10,10,10,10"
+                   FontSize="15"
+                   />
+            </ScrollViewer>
+
+            <Expander Grid.Column="1" 
+                  IsExpanded="False" 
+                  ExpandDirection="Right" 
+                  Width="auto"
+                  Background="Transparent">
+                <Expander.Header>
+                    <Grid>
+                        <TextBlock  Foreground="White"
+                                Text="More Information"
+                                FontFamily="David"
+                                HorizontalAlignment="Center"
+                                FontSize="20">
+                            <TextBlock.LayoutTransform>
+                                <RotateTransform Angle="90"/>
+                            </TextBlock.LayoutTransform>
+                        </TextBlock>
+                    </Grid>
+                </Expander.Header>
+                <ScrollViewer Background="Transparent">
+                    <StackPanel DataContext="{Binding ISSDataResponse}">
+                        <ItemsControl>
+                            
+                            <TextBlock Text="{Binding Latitude,StringFormat='Latitude {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding Longitude,StringFormat='Longitude {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding Altitude,StringFormat='Altitude {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding Velocity,StringFormat='Velocity {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding Visibility,StringFormat='Visibility {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding Footprint,StringFormat='Footprint {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding Timestamp,StringFormat='Timestamp {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding Daynum,StringFormat='Day {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding SolarLat,StringFormat='Solar Latitude {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding SolarLon,StringFormat='Solar Longitude {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding Units,StringFormat='Units {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                            <TextBlock Text="{Binding DateTime,StringFormat='Time {0:}'}"
+                           Foreground="White" 
+                           Margin="10,10,10,10"/>
+                            
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+
+            </Expander>
+            <Image Grid.Column="2" 
+               Source="{Binding ISSDataResponse.ImageData ,
             Converter={StaticResource UrlToImageConverter}}"/>
-
-
-
-
-
-
-        <Button
-        Content="{materialDesign:PackIcon  Refresh}"
-        ToolTip="Update Location" 
-              Command="{Binding refreshISScomand}"   
-              VerticalAlignment="Bottom"
-              HorizontalAlignment="Left"
-              Width="Auto"/>
+        </Grid>
 
     </Grid>
 

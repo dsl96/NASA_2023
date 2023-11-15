@@ -4,6 +4,7 @@ using GUI.services.implementation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,22 +17,35 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace GUI.MVVM.View.UserControlls
 {
+
     /// <summary>
     /// Interaction logic for IssTrackerUserControl.xaml
     /// </summary>
     public partial class IssTrackerUserControl : UserControl
     {
-        private readonly ISSlocationVM vmISS;
-        public  IssTrackerUserControl()
+       // private string path = @"..\NASA_2023\GUI\resources\Text.xml";
+
+        public IssTrackerUserControl()
         {
             InitializeComponent();
 
-            vmISS = new ISSlocationVM();
-            DataContext = vmISS;
+            //XmlSerializer serializer = new XmlSerializer(typeof(string));
+            //FileStream file = new FileStream(path,FileMode.Open, FileAccess.Read,FileShare.None);
+            //Text = (string)serializer. Deserialize(file);
+            //file.Close();
+            DataContext = new ISSlocationVM();
         }
 
+        private void PlayMedia(object sender, RoutedEventArgs e)
+        {
+            var mediaElement = (MediaElement)sender;
+            mediaElement.Position = TimeSpan.FromSeconds(2);
+            mediaElement.Play();
+        }
     }
 }

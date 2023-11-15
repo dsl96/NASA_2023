@@ -50,6 +50,27 @@ namespace GUI.MVVM.Model
         public bool IsSentryObject { get; set; }
     }
 
+    public class CloseApproachData
+    {
+        [JsonProperty("CloseApproachDate")]
+        public string CloseApproachDate { get; set; }
+
+        [JsonProperty("CloseApproachDateFull")]
+        public string CloseApproachDateFull { get; set; }
+
+        [JsonProperty("EpochDateCloseApproach")]
+        public long EpochDateCloseApproach { get; set; }
+
+        [JsonProperty("RelativeVelocity")]
+        public RelativeVelocity RelativeVelocity { get; set; }
+
+        [JsonProperty("MissDistance")]
+        public MissDistance MissDistance { get; set; }
+
+        [JsonProperty("OrbitingBody")]
+        public string OrbitingBody { get; set; }
+    }
+
     public class Link
     {
         [JsonProperty("Self")]
@@ -138,26 +159,5 @@ namespace GUI.MVVM.Model
 
         [JsonProperty("Miles")]
         public string Miles { get; set; }
-    }
-
-    public class CloseApproachData
-    {
-        [JsonProperty("CloseApproachDate")]
-        public string CloseApproachDate { get; set; }
-
-        [JsonProperty("CloseApproachDateFull")]
-        public string CloseApproachDateFull { get; set; }
-
-        [JsonProperty("EpochDateCloseApproach")]
-        public long EpochDateCloseApproach { get; set; }
-
-        [JsonProperty("RelativeVelocity")]
-        public RelativeVelocity RelativeVelocity { get; set; }
-
-        [JsonProperty("MissDistance")]
-        public MissDistance MissDistance { get; set; }
-
-        [JsonProperty("OrbitingBody")]
-        public string OrbitingBody { get; set; }
     }
 }
